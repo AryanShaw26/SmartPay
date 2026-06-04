@@ -1,0 +1,191 @@
+/* ==========================
+   PAGE
+========================== */
+
+.register-container {
+  min-height: 100vh;
+
+  background: #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.register-card {
+  width: 100%;
+  max-width: 500px;
+
+  background: #0a0a0a;
+
+  border: 1px solid rgba(255, 215, 0, 0.15);
+
+  border-radius: 25px;
+
+  padding: 40px;
+
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.08);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.register-header {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.register-header h1 {
+  color: white;
+
+  font-size: 2.5rem;
+
+  margin-bottom: 10px;
+}
+
+.register-header h1 span {
+  color: #FFD700;
+}
+
+.register-header h2 {
+  color: white;
+
+  margin-bottom: 10px;
+}
+
+.register-header p {
+  color: #9ca3af;
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+.input-group {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+
+  left: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #FFD700;
+}
+
+.input-group input {
+  width: 100%;
+
+  padding: 16px 16px 16px 50px;
+
+  background: #111;
+
+  border: 1px solid rgba(255, 215, 0, 0.15);
+
+  border-radius: 12px;
+
+  color: white;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #FFD700;
+
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.register-btn {
+  background: #FFD700;
+
+  color: black;
+
+  border: none;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.register-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+.register-footer {
+  margin-top: 25px;
+
+  text-align: center;
+
+  color: #9ca3af;
+}
+
+.register-footer a {
+  color: #FFD700;
+
+  margin-left: 8px;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 576px) {
+
+  .register-card {
+    padding: 25px;
+  }
+
+  .register-header h1 {
+    font-size: 2rem;
+  }
+
+}

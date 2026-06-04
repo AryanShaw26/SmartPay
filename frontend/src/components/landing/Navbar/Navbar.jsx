@@ -1,11 +1,13 @@
 import "./Navbar.css";
 import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
           <img src={logo} alt="SmartPay Logo" className="navbar-logo" />
+          <p className="logo-text"><span className="line">---</span>Smarter Payment Better Life <span className="line">---</span></p>
         </div>
         <ul className="navbar-links">
           <li>
@@ -27,8 +29,13 @@ function Navbar() {
           </li>
         </ul>
         <div className="navbar-buttons">
-          <button className="login-btn">Login</button>
-          <button className="signup-btn">Sign Up</button>
+          <Link to="/login">
+            <button className="login-btn">Login</button>
+          </Link>
+
+          <Link to="/register">
+            <button className="signup-btn">Sign Up</button>
+          </Link>
         </div>
       </div>
     </nav>
