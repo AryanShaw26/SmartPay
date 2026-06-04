@@ -1,0 +1,172 @@
+/* ==========================
+   SECTION
+========================== */
+
+.about-section {
+  width: 100%;
+  background: #000;
+
+  padding: 120px 8%;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.about-header {
+  text-align: center;
+
+  margin-bottom: 70px;
+}
+
+.about-tag {
+  color: #ffd700;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+}
+
+.about-header h2 {
+  color: white;
+
+  font-size: 3rem;
+
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.about-header h2 span {
+  color: #ffd700;
+}
+
+.about-header p {
+  color: #9ca3af;
+
+  max-width: 700px;
+
+  margin: auto;
+
+  line-height: 1.8;
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.about-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+
+  margin-bottom: 80px;
+}
+
+.about-card {
+  background: #0a0a0a;
+
+  border: 1px solid rgba(255, 215, 0, 0.15);
+
+  border-radius: 20px;
+
+  padding: 35px;
+
+  text-align: center;
+
+  transition: 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #ffd700;
+
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+}
+
+.about-icon {
+  width: 80px;
+  height: 80px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  background: rgba(255, 215, 0, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ffd700;
+
+  font-size: 2rem;
+
+  margin-bottom: 20px;
+}
+
+.about-card h3 {
+  color: white;
+
+  margin-bottom: 15px;
+}
+
+.about-card p {
+  color: #9ca3af;
+
+  line-height: 1.7;
+}
+
+/* ==========================
+   BOTTOM TEXT
+========================== */
+
+.about-bottom {
+  max-width: 900px;
+
+  margin: auto;
+
+  text-align: center;
+}
+
+.about-bottom h3 {
+  color: white;
+
+  font-size: 2rem;
+
+  margin-bottom: 20px;
+}
+
+.about-bottom p {
+  color: #9ca3af;
+
+  line-height: 2;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 1024px) {
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .about-header h2 {
+    font-size: 2.2rem;
+  }
+
+  .about-bottom h3 {
+    font-size: 1.8rem;
+  }
+
+}

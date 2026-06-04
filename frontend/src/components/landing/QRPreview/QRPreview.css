@@ -1,0 +1,194 @@
+/* ==========================
+   SECTION
+========================== */
+
+.qr-section {
+  width: 100%;
+  background: #000;
+
+  padding: 120px 8%;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.qr-container {
+  max-width: 1400px;
+
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+
+  gap: 80px;
+}
+
+/* ==========================
+   CONTENT
+========================== */
+
+.qr-content {
+  color: white;
+}
+
+.qr-tag {
+  color: #ffd700;
+
+  letter-spacing: 2px;
+
+  font-weight: 600;
+
+  font-size: 0.9rem;
+}
+
+.qr-content h2 {
+  font-size: 3.5rem;
+
+  margin-top: 15px;
+  margin-bottom: 25px;
+
+  line-height: 1.2;
+}
+
+.qr-content h2 span {
+  color: #ffd700;
+}
+
+.qr-content p {
+  color: #9ca3af;
+
+  line-height: 1.9;
+
+  margin-bottom: 35px;
+}
+
+/* ==========================
+   FEATURES
+========================== */
+
+.qr-features {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  margin-bottom: 35px;
+}
+
+.qr-item {
+  color: white;
+
+  font-size: 1rem;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.qr-btn {
+  background: #ffd700;
+
+  color: black;
+
+  border: none;
+
+  padding: 16px 34px;
+
+  border-radius: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.qr-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+}
+
+/* ==========================
+   IMAGE
+========================== */
+
+.qr-image-container {
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+}
+
+.qr-image-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  background: #ffd700;
+
+  border-radius: 50%;
+
+  filter: blur(180px);
+
+  opacity: 0.15;
+
+  z-index: 0;
+}
+
+.qr-image {
+  width: 100%;
+  max-width: 420px;
+
+  position: relative;
+
+  z-index: 2;
+
+  border-radius: 20px;
+
+  transition: 0.3s ease;
+}
+
+.qr-image:hover {
+  transform: translateY(-10px);
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width: 1024px) {
+
+  .qr-container {
+    grid-template-columns: 1fr;
+
+    text-align: center;
+  }
+
+  .qr-features {
+    align-items: center;
+  }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+  .qr-content h2 {
+    font-size: 2.4rem;
+  }
+
+  .qr-image {
+    max-width: 280px;
+  }
+
+}
