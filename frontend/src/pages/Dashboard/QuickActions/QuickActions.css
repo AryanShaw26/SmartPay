@@ -1,0 +1,128 @@
+/* ==========================
+   QUICK ACTIONS CARD
+========================== */
+
+.quick-actions {
+  background: #111;
+
+  border: 1px solid rgba(255, 215, 0, 0.1);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  width: 100%;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.actions-header {
+  margin-bottom: 20px;
+}
+
+.actions-header h3 {
+  color: white;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.actions-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+/* ==========================
+   ACTION CARD
+========================== */
+
+.action-card {
+  background: #1a1a1a;
+
+  border: 1px solid rgba(255, 215, 0, 0.08);
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(255, 215, 0, 0.4);
+
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+/* ==========================
+   ICON
+========================== */
+
+.action-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(255, 215, 0, 0.12);
+
+  color: #FFD700;
+
+  font-size: 1.5rem;
+}
+
+/* ==========================
+   TITLE
+========================== */
+
+.action-title {
+  color: white;
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

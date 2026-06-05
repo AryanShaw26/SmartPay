@@ -1,0 +1,199 @@
+/* ==========================
+   TRANSACTIONS CARD
+========================== */
+
+.transactions-card {
+  background: #111;
+
+  border: 1px solid rgba(255, 215, 0, 0.1);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  width: 100%;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.transactions-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.transactions-header h3 {
+  color: white;
+
+  font-size: 1.3rem;
+
+  font-weight: 600;
+}
+/* 1. Target the h3 with the class .hover-underline inside the header */
+.transactions-header h3.hover-underline {
+    font-size: 2rem;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+    cursor: pointer; /* Optional: lets users know it's interactive */
+}
+
+/* 2. Base styles for both top and bottom lines */
+.hover-underline::after,
+.hover-underline::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #FFD700, #021313);
+    transform: scaleX(0);
+    transition: transform 0.4s ease-out;
+}
+
+/* 3. Position and origin for the bottom line (expands from right to left) */
+.hover-underline::after {
+    bottom: -5px;
+    left: 0;
+    transform-origin: right;
+}
+
+/* 4. Position and origin for the top line (expands from left to right) */
+.hover-underline::before {
+    top: -5px;
+    left: 0;
+    transform-origin: left;
+}
+
+/* 5. Trigger the animation on hover */
+.hover-underline:hover::after,
+.hover-underline:hover::before {
+    transform: scaleX(1);
+}
+
+.view-all {
+  color: #FFD700;
+
+  cursor: pointer;
+
+  font-size: 0.9rem;
+
+  font-weight: 500;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   LIST
+========================== */
+
+.transactions-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* ==========================
+   ITEM
+========================== */
+
+.transaction-item {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+/* ==========================
+   LEFT SECTION
+========================== */
+
+.transaction-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.transaction-avatar {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background: #1a1a1a;
+
+  font-size: 1.4rem;
+}
+
+.transaction-details h4 {
+  color: white;
+
+  margin-bottom: 4px;
+
+  font-size: 1rem;
+}
+
+.transaction-details p {
+  color: #9ca3af;
+
+  font-size: 0.85rem;
+}
+
+/* ==========================
+   AMOUNT
+========================== */
+
+.transaction-amount {
+  font-size: 1rem;
+
+  font-weight: 600;
+}
+
+.credit {
+  color: #22c55e;
+}
+
+.debit {
+  color: #ef4444;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px) {
+
+  .transaction-item {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+}

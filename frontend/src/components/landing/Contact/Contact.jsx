@@ -23,12 +23,12 @@ function Contact() {
 
           <div className="info-card">
             <FaEnvelope />
-            <span>support@smartpay.com</span>
+            <span>aryanshaw344@gmail..com</span>
           </div>
 
           <div className="info-card">
             <FaPhone />
-            <span>+91 98765 43210</span>
+            <span>+91 74393 XXXX</span>
           </div>
 
           <div className="info-card">

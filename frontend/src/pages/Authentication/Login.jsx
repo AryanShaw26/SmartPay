@@ -1,7 +1,10 @@
 import "./Login.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function Login() {
+  const navigate = useNavigate();
   return (
     <div className="login-container">
 
@@ -61,6 +64,7 @@ function Login() {
           <button
             type="submit"
             className="login-btn"
+            onClick={()=>navigate("/dashboard")}
           >
             Login
           </button>

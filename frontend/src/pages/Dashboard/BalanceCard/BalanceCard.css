@@ -1,0 +1,220 @@
+/* ==========================
+   BALANCE CARD
+========================== */
+
+.balance-card {
+  background: #111;
+
+  border: 1px solid rgba(255, 215, 0, 0.1);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  width: 100%;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  transition: 0.3s ease;
+}
+
+.balance-card:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.balance-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.title h3 {
+  color: #9ca3af;
+
+  font-size: 1rem;
+
+  font-weight: 500;
+}
+
+.eye-icon {
+  color: #FFD700;
+
+  cursor: pointer;
+
+  font-size: 1.2rem;
+}
+
+/* ==========================
+   BALANCE AMOUNT
+========================== */
+
+.balance-amount {
+  margin-bottom: 25px;
+}
+
+.balance-amount h1 {
+  color: white;
+
+  font-size: 2.5rem;
+
+  font-weight: 700;
+}
+
+/* ==========================
+   ACTION BUTTONS
+========================== */
+
+.balance-actions {
+  display: flex;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.add-money-btn,
+.send-money-btn {
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: 0.3s ease;
+}
+
+/* Add Money */
+
+.add-money-btn {
+  background: #FFD700;
+
+  color: black;
+}
+
+.add-money-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Send Money */
+
+.send-money-btn {
+  background: transparent;
+
+  color: white;
+
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.send-money-btn:hover {
+  background: rgba(255, 215, 0, 0.08);
+
+  color: #FFD700;
+}
+
+/* ==========================
+   SUMMARY
+========================== */
+
+.balance-summary {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+}
+
+/* Income */
+
+.income-box {
+  background: rgba(34, 197, 94, 0.1);
+
+  border: 1px solid rgba(34, 197, 94, 0.2);
+
+  border-radius: 15px;
+
+  padding: 15px;
+}
+
+.income-title {
+  color: #9ca3af;
+
+  margin-bottom: 8px;
+
+  font-size: 0.9rem;
+}
+
+.income-value {
+  color: #22c55e;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+}
+
+/* Expense */
+
+.expense-box {
+  background: rgba(239, 68, 68, 0.1);
+
+  border: 1px solid rgba(239, 68, 68, 0.2);
+
+  border-radius: 15px;
+
+  padding: 15px;
+}
+
+.expense-title {
+  color: #9ca3af;
+
+  margin-bottom: 8px;
+
+  font-size: 0.9rem;
+}
+
+.expense-value {
+  color: #ef4444;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px) {
+
+  .balance-actions {
+    flex-direction: column;
+  }
+
+  .balance-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .balance-amount h1 {
+    font-size: 2rem;
+  }
+
+}

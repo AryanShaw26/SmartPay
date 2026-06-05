@@ -82,6 +82,7 @@ function Register() {
           <button
             type="submit"
             className="register-btn"
+            onClick={()=>navigate("/dashboard")}
           >
             Create Account
           </button>
