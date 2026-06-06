@@ -1,0 +1,116 @@
+.qr-scanner {
+    background: #111;
+
+    border: 1px solid rgba(255, 215, 0, 0.15);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+
+.scanner-header h2 {
+    color: #FFD700;
+
+    font-size: 1.6rem;
+
+    font-weight: 600;
+}
+
+/* QR Area */
+
+.qr-placeholder {
+    width: 220px;
+
+    height: 220px;
+
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+
+    border-radius: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #1a1a1a;
+}
+
+.qr-placeholder svg {
+    font-size: 6rem;
+
+    color: #FFD700;
+}
+
+/* Text */
+
+.scanner-text {
+    color: #888;
+
+    text-align: center;
+
+    font-size: 0.95rem;
+}
+
+/* Button */
+
+.scan-btn {
+    background: #FFD700;
+
+    color: black;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 14px 24px;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.scan-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .qr-scanner {
+        max-width: 100%;
+    }
+
+    .qr-placeholder {
+        width: 180px;
+
+        height: 180px;
+    }
+
+    .qr-placeholder svg {
+        font-size: 5rem;
+    }
+}

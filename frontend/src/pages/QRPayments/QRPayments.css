@@ -1,0 +1,57 @@
+/* Main Layout */
+
+.qrpayments-layout {
+    display: flex;
+
+    min-height: 100vh;
+
+    background: #000;
+}
+
+/* Main Content Area */
+
+.qrpayments-main {
+    flex: 1;
+
+    margin-left: 280px;
+
+    padding: 25px;
+}
+
+/* Page Content */
+
+.qrpayments-content {
+    margin-top: 25px;
+}
+
+/* Scanner + Generator */
+
+.qr-top-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+
+    .qr-top-section {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .qrpayments-main {
+        margin-left: 80px;
+    }
+
+}
