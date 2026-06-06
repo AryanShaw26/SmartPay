@@ -2,6 +2,7 @@ import { FaEye } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosSend } from "react-icons/io";
 import "./BalanceCard.css";
+import { Link } from "react-router-dom";
 function BalanceCard() {
   return (
     <>
@@ -18,10 +19,10 @@ function BalanceCard() {
           <h1>₹ 24,680.50</h1>
         </div>
         <div className="balance-actions">
-          <div className="add-money-btn">
+          <Link to= "/add-money" className="add-money-btn">
             <IoIosAddCircleOutline />
             <span>Add Money</span>
-          </div>
+          </Link>
           <div className="send-money-btn">
             <IoIosSend />
             <span>Send Money</span>

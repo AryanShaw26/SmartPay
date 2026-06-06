@@ -1,6 +1,7 @@
 import logo from "../../../assets/logo.png";
 import { MdSpaceDashboard } from "react-icons/md";
-import "./Sidebar.css"
+import "./Sidebar.css";
+import { Link } from "react-router-dom";
 import {
   FaPlusCircle,
   FaPaperPlane,
@@ -21,14 +22,14 @@ function Sidebar() {
           <img src={logo} alt="smartpay-logo" className="sidebar-logo" />
         </div>
         <div className="sidebar-menu">
-          <div className="sidebar-item active">
+          <Link to="/" className="sidebar-item active">
             <MdSpaceDashboard />
             <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
+          </Link>
+          <Link to="/add-money" className="sidebar-item">
             <FaPlusCircle></FaPlusCircle>
             <span>Add Money</span>
-          </div>
+          </Link>
           <div className="sidebar-item">
             <FaPaperPlane></FaPaperPlane>
             <span>Send Money</span>

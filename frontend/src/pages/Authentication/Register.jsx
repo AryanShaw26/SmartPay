@@ -93,7 +93,7 @@ function Register() {
 
           Already have an account?
 
-          <Link href="/login">
+          <Link to="/login">
             Login
           </Link>
 

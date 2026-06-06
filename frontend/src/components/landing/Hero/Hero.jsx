@@ -3,6 +3,7 @@ import hero from "../../../assets/hero-phone.png";
 import smartpay_card from "../../../assets/smartpay-card.png";
 import { useNavigate } from "react-router-dom";
 function Hero() {
+  const navigate=useNavigate();
   return (
     <>
       <section className="hero-container">
@@ -18,7 +19,7 @@ function Hero() {
             The smarter, safer and faster way to manage your money
           </p>
           <div className="left-btn">
-            <button className="get-started" onClick={()=>Navigate("/register")}>Get Started</button>
+            <button className="get-started" onClick={()=>navigate("/register")}>Get Started</button>
             <button className="learn-more">Learn More</button>
           </div>
           <div className="low-left">
