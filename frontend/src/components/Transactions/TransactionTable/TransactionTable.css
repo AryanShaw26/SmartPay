@@ -1,0 +1,58 @@
+.table-container{
+    width:100%
+    
+}
+.table-container h1{
+    color:#ffd700;
+    text-align: center;
+    margin-top:20px;
+}
+.transaction-details{
+    background: #111;
+
+    border: 1px solid rgba(255, 215, 0, 0.15);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+    transition: 0.3s;
+    color: #ffd700;
+    justify-content: space-evenly;
+}
+.transaction-row{
+    display:flex;
+
+    justify-content:space-evenly;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:#1a1a1a;
+
+    color:white;
+
+    border-radius:12px;
+
+    margin-top:10px;
+}
+.success{
+    color:#00d26a;
+}
+
+.pending{
+    color:#FFD700;
+}
+
+.failed{
+    color:#ff4d4d;
+}

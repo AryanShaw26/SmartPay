@@ -1,0 +1,57 @@
+.search-bar{
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #111;
+
+    border: 1px solid rgba(255,215,0,0.15);
+
+    border-radius: 12px;
+
+    padding: 12px 15px;
+
+    margin-top: 20px;
+
+}
+.search-bar input {
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+}
+
+.filter-selection{
+    display:flex;
+    flex-direction: row;
+    gap:50px;
+    margin-top: 20px;
+}
+.filter-selection button {
+    background: #111;
+
+    color: #FFD700;
+
+    border: 1px solid rgba(255,215,0,0.15);
+
+    padding: 10px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+.filter-selection button:hover {
+    background: #FFD700;
+
+    color: black;
+    font-weight: 500;
+}
