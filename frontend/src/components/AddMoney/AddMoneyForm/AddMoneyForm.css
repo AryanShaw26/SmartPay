@@ -1,0 +1,151 @@
+/* Full Container */
+
+.add-money-form-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+
+  width: 100%;
+
+}
+
+/* Card */
+
+.add-money-form {
+  background: #111;
+
+  border: 1px solid rgba(255, 215, 0, 0.15);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  width: 500px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading */
+
+.add-money-form h2 {
+  color: #ffd700;
+
+  font-size: 1.8rem;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+/* Label */
+
+.add-money-form label {
+  color: white;
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+}
+
+/* Input */
+
+.add-money-form input {
+  width: 100%;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #333;
+
+  background: #1a1a1a;
+
+  color: white;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.add-money-form input:focus {
+  border-color: #ffd700;
+}
+
+/* Quick Amounts */
+
+.quick-amounts {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+}
+
+.quick-amounts button {
+  padding: 12px;
+
+  background: #1a1a1a;
+
+  color: #ffd700;
+
+  border: 1px solid rgba(255, 215, 0, 0.2);
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.quick-amounts button:hover {
+  background: #ffd700;
+
+  color: black;
+  font-weight: 700;
+}
+
+/* Main Button */
+
+.add-money-btn {
+  padding: 14px;
+
+  background: #ffd700;
+
+  color: black;
+
+  border: none;
+
+  border-radius: 12px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.add-money-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+  .add-money-form {
+    width: 100%;
+  }
+}
