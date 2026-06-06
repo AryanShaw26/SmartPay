@@ -1,0 +1,135 @@
+.appearance-settings {
+    background: #111;
+
+    border: 1px solid rgba(255, 215, 0, 0.15);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    width: 100%;
+
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+
+.appearance-header {
+    margin-bottom: 25px;
+}
+
+.appearance-header h2 {
+    color: #FFD700;
+
+    text-align: center;
+
+    font-size: 1.6rem;
+}
+
+/* Sections */
+
+.setting-section {
+    margin-bottom: 25px;
+}
+
+.setting-section h3 {
+    color: white;
+
+    margin-bottom: 15px;
+
+    font-size: 1.1rem;
+}
+
+/* Theme Options */
+
+.theme-options {
+    display: flex;
+
+    gap: 25px;
+}
+
+.theme-option {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: white;
+}
+
+.theme-option input {
+    cursor: pointer;
+}
+
+.theme-option label {
+    cursor: pointer;
+}
+
+/* Select */
+
+.setting-section select {
+    width: 100%;
+
+    background: #1a1a1a;
+
+    color: white;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    outline: none;
+}
+
+.setting-section select:focus {
+    border-color: #FFD700;
+}
+
+/* Button */
+
+.save-appearance-btn {
+    width: 100%;
+
+    background: #FFD700;
+
+    color: black;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.save-appearance-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .theme-options {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+}

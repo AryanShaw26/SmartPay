@@ -5,9 +5,10 @@ import SendMoney from "./pages/SendMoney/SendMoney";
 import Transactions from "./pages/Transactions/Transactions";
 import Beneficiaries from "./pages/Beneficiaries/Beneficiaries";
 import QRPayments from "./pages/QRPayments/QRPayments";
+import Settings from "./pages/Settings/Settings";
 function App() {
   // return <AppRoutes />;
-  return <QRPayments></QRPayments>
+  return <Settings></Settings>
 }
 
 export default App;
