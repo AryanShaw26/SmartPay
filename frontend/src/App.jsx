@@ -3,10 +3,10 @@
 import AddMoney from "./pages/AddMoney/AddMoney";
 import SendMoney from "./pages/SendMoney/SendMoney";
 import Transactions from "./pages/Transactions/Transactions";
-
+import Beneficiaries from "./pages/Beneficiaries/Beneficiaries";
 function App() {
   // return <AppRoutes />;
-  return <Transactions></Transactions>
+  return <Beneficiaries></Beneficiaries>
 }
 
 export default App;

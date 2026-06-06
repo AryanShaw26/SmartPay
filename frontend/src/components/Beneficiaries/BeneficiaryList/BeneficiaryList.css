@@ -1,0 +1,33 @@
+.beneficiary-list {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 20px auto;
+}
+
+/* Header */
+
+.beneficiary-list-header {
+    margin-bottom: 20px;
+}
+
+.beneficiary-list-header h2 {
+    color: #FFD700;
+
+    text-align: center;
+
+    font-size: 1.6rem;
+
+    font-weight: 600;
+}
+
+/* Cards Container */
+
+.beneficiaries-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}

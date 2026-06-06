@@ -1,0 +1,122 @@
+.beneficiary-card {
+    background: #111;
+
+    border: 1px solid rgba(255, 215, 0, 0.15);
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.beneficiary-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+/* Left Side */
+
+.beneficiary-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+/* Avatar */
+
+.beneficiary-avatar {
+    font-size: 3rem;
+
+    color: #FFD700;
+}
+
+/* Details */
+
+.beneficiary-details h3 {
+    color: white;
+
+    margin-bottom: 5px;
+
+    font-size: 1.1rem;
+}
+
+.beneficiary-details p {
+    color: #888;
+
+    margin-bottom: 8px;
+}
+
+/* Status */
+
+.beneficiary-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #00d26a;
+
+    font-size: 0.9rem;
+
+    font-weight: 500;
+}
+
+/* Button */
+
+.send-money-btn {
+    background: #FFD700;
+
+    color: black;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.send-money-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .beneficiary-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .beneficiary-actions {
+        width: 100%;
+    }
+
+    .send-money-btn {
+        width: 100%;
+    }
+}
