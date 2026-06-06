@@ -1,0 +1,95 @@
+.recipient-card {
+    background: #111;
+
+    border: 1px solid rgba(255, 215, 0, 0.15);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: 20px auto;
+}
+
+/* Header */
+
+.recipient-header {
+    margin-bottom: 20px;
+}
+
+.recipient-header h2 {
+    color: #FFD700;
+
+    font-size: 1.5rem;
+
+    font-weight: 600;
+}
+
+/* User Info Section */
+
+.recipient-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+/* Avatar */
+
+.recipient-avatar {
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 215, 0, 0.1);
+
+    color: #FFD700;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 2rem;
+}
+
+/* User Details */
+
+.recipient-details h3 {
+    color: white;
+
+    margin-bottom: 5px;
+
+    font-size: 1.2rem;
+}
+
+.recipient-details p {
+    color: #888;
+
+    font-size: 0.95rem;
+}
+
+/* Status */
+
+.recipient-status {
+    color: #00d26a;
+
+    font-weight: 600;
+
+    font-size: 0.95rem;
+
+    padding-top: 10px;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
