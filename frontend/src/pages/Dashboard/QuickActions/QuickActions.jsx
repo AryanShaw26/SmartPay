@@ -1,5 +1,5 @@
 import "./QuickActions.css";
-
+import { Link } from "react-router-dom";
 import {
   FaQrcode,
   FaPlusCircle,
@@ -20,35 +20,21 @@ function ActionCard({ icon, title }) {
 function QuickActions() {
   return (
     <div className="quick-actions">
-
       <div className="actions-header">
         <h3>Quick Actions</h3>
       </div>
 
       <div className="actions-grid">
+        <ActionCard icon={<FaQrcode />} title="Scan QR" />
+        <Link to="/add-money">
+          <ActionCard icon={<FaPlusCircle />} title="Add Money" />
+        </Link>
+        <Link to="/send-money">
+          <ActionCard icon={<FaPaperPlane />} title="Send Money" />
+        </Link>
 
-        <ActionCard
-          icon={<FaQrcode />}
-          title="Scan QR"
-        />
-
-        <ActionCard
-          icon={<FaPlusCircle />}
-          title="Add Money"
-        />
-
-        <ActionCard
-          icon={<FaPaperPlane />}
-          title="Send Money"
-        />
-
-        <ActionCard
-          icon={<FaEllipsisH />}
-          title="More"
-        />
-
+        <ActionCard icon={<FaEllipsisH />} title="More" />
       </div>
-
     </div>
   );
 }

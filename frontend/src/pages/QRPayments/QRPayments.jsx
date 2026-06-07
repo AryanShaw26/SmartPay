@@ -7,7 +7,7 @@ import QRGenerator from "../../components/QRPayments/QRGenerator/QRGenerator";
 import "./QRPayments.css";
 import QRPaymentSummary from "../../components/QRPayments/QRPaymentSummary/QRPaymentSummary";
 import RecentQRTransactions from "../../components/QRPayments/RecentQRTransactions/RecentQRTransactions";
-
+import { Link } from "react-router-dom";
 function QRPayments() {
   return (
     <div className="qrpayments-layout">

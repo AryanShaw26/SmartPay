@@ -23,10 +23,10 @@ function BalanceCard() {
             <IoIosAddCircleOutline />
             <span>Add Money</span>
           </Link>
-          <div className="send-money-btn">
+          <Link to="/send-money" className="send-money-btn">
             <IoIosSend />
             <span>Send Money</span>
-          </div>
+          </Link>
         </div>
         <div className="balance-summary">
           <div className="income-box">
