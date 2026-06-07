@@ -1,26 +1,51 @@
+import { useState } from "react";
+
 import Sidebar from "../Dashboard/Sidebar/Sidebar";
 import Header from "../Dashboard/Header/Header";
-import "./Beneficiaries.css";
+
 import AddBeneficiaryForm from "../../components/Beneficiaries/AddBeneficiaryForm/AddBeneficiaryForm";
-import SearchBeneficiary from "../../components/Beneficiaries/SearchBenificiary/SearchBeneficiary";
-import BeneficiaryCard from "../../components/Beneficiaries/BeneficiaryCard/BeneficiaryCard";
+import SearchBeneficiary from "../../components/Beneficiaries/SearchBeneficiary/SearchBeneficiary";
 import BeneficiaryList from "../../components/Beneficiaries/BeneficiaryList/BeneficiaryList";
-import { Link } from "react-router-dom";
+
+import "./Beneficiaries.css";
+
 function Beneficiaries() {
+  const [beneficiaries, setBeneficiaries] = useState([]);
+
+  const addBeneficiary = (newBeneficiary) => {
+    setBeneficiaries([
+      ...beneficiaries,
+      newBeneficiary,
+    ]);
+  };
+
   return (
     <div className="beneficiaries-layout">
+
       <Sidebar />
 
       <div className="beneficiaries-main">
+
         <Header />
 
-        <div className="beneficiary-form">
-          <AddBeneficiaryForm />
-          <SearchBeneficiary></SearchBeneficiary>
-          <BeneficiaryList></BeneficiaryList>
+        <div className="beneficiaries-content">
+
+          <AddBeneficiaryForm
+            addBeneficiary={addBeneficiary}
+          />
+
+          <SearchBeneficiary />
+
+          <BeneficiaryList
+            beneficiaries={beneficiaries}
+          />
+
         </div>
+
       </div>
+
     </div>
   );
 }
+
 export default Beneficiaries;

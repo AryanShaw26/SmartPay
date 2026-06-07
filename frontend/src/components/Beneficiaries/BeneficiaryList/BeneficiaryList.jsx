@@ -1,7 +1,7 @@
 import "./BeneficiaryList.css";
 import BeneficiaryCard from "../BeneficiaryCard/BeneficiaryCard";
 
-function BeneficiaryList() {
+function BeneficiaryList({ beneficiaries }) {
   return (
     <div className="beneficiary-list">
 
@@ -11,13 +11,13 @@ function BeneficiaryList() {
 
       <div className="beneficiaries-container">
 
-        <BeneficiaryCard />
-
-        <BeneficiaryCard />
-
-        <BeneficiaryCard />
-
-        <BeneficiaryCard />
+        {beneficiaries.map((beneficiary) => (
+          <BeneficiaryCard
+            key={beneficiary.id}
+            name={beneficiary.name}
+            email={beneficiary.email}
+          />
+        ))}
 
       </div>
 

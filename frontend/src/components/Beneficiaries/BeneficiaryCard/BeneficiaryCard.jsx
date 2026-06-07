@@ -1,8 +1,8 @@
 import "./BeneficiaryCard.css";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
-
-function BeneficiaryCard() {
+import { Link } from "react-router-dom";
+function BeneficiaryCard({name,email}) {
   return (
     <div className="beneficiary-card">
 
@@ -14,9 +14,9 @@ function BeneficiaryCard() {
 
         <div className="beneficiary-details">
 
-          <h3>Raj Sharma</h3>
+          <h3>{name}</h3>
 
-          <p>rajsharma@gmail.com</p>
+          <p>{email}</p>
 
           <div className="beneficiary-status">
             <FaCheckCircle />
@@ -27,11 +27,11 @@ function BeneficiaryCard() {
 
       </div>
 
-      <div className="beneficiary-actions">
+      <Link to="/send-money" className="beneficiary-actions">
         <button className="send-money-btn">
           Send Money
         </button>
-      </div>
+      </Link>
 
     </div>
   );
