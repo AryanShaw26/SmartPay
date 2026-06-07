@@ -1,10 +1,6 @@
 import "./SearchBeneficiary.css";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
-
-function SearchBeneficiary() {
-
-  const [searchTerm, setSearchTerm] = useState("");
+function SearchBeneficiary({searchTerm,setSearchTerm}) {
 
   return (
     <div className="search-beneficiary">

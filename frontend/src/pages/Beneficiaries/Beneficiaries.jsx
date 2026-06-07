@@ -18,7 +18,17 @@ function Beneficiaries() {
       newBeneficiary,
     ]);
   };
+  const [searchTerm,setSearchTerm]=useState("");
+  const filteredBeneficiaries = beneficiaries.filter(
+  (beneficiary) =>
+    beneficiary.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase()) ||
 
+    beneficiary.email
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+);
   return (
     <div className="beneficiaries-layout">
 
@@ -34,10 +44,12 @@ function Beneficiaries() {
             addBeneficiary={addBeneficiary}
           />
 
-          <SearchBeneficiary />
+          <SearchBeneficiary 
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}/>
 
           <BeneficiaryList
-            beneficiaries={beneficiaries}
+            beneficiaries={filteredBeneficiaries}
           />
 
         </div>
