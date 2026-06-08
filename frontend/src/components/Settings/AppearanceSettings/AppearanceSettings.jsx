@@ -1,14 +1,23 @@
 import "./AppearanceSettings.css";
+import { useState } from "react";
 
 function AppearanceSettings() {
+  const [theme, setTheme] = useState("dark");
+  const [language, setLanguage] = useState("English");
+
+  const handleSave = () => {
+    console.log({
+      theme,
+      language,
+    });
+  };
+
   return (
     <div className="appearance-settings">
 
       <div className="appearance-header">
         <h2>Appearance Settings</h2>
       </div>
-
-      {/* Theme Selection */}
 
       <div className="setting-section">
 
@@ -21,7 +30,10 @@ function AppearanceSettings() {
               type="radio"
               id="dark-mode"
               name="theme"
-              defaultChecked
+              checked={theme === "dark"}
+              onChange={() =>
+                setTheme("dark")
+              }
             />
             <label htmlFor="dark-mode">
               Dark Mode
@@ -33,6 +45,10 @@ function AppearanceSettings() {
               type="radio"
               id="light-mode"
               name="theme"
+              checked={theme === "light"}
+              onChange={() =>
+                setTheme("light")
+              }
             />
             <label htmlFor="light-mode">
               Light Mode
@@ -43,25 +59,27 @@ function AppearanceSettings() {
 
       </div>
 
-      {/* Language Selection */}
-
       <div className="setting-section">
 
         <h3>Language</h3>
 
-        <select>
-
+        <select
+          value={language}
+          onChange={(e) =>
+            setLanguage(e.target.value)
+          }
+        >
           <option>English</option>
-
           <option>Hindi</option>
-
           <option>Bengali</option>
-
         </select>
 
       </div>
 
-      <button className="save-appearance-btn">
+      <button
+        className="save-appearance-btn"
+        onClick={handleSave}
+      >
         Save Appearance
       </button>
 

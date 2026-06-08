@@ -1,6 +1,19 @@
 import "./SecuritySettings.css";
+import { useState } from "react";
 
 function SecuritySettings() {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleUpdate = () => {
+    console.log({
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    });
+  };
+
   return (
     <div className="security-settings">
 
@@ -13,6 +26,10 @@ function SecuritySettings() {
         <input
           type="password"
           placeholder="Enter Current Password"
+          value={currentPassword}
+          onChange={(e) =>
+            setCurrentPassword(e.target.value)
+          }
         />
       </div>
 
@@ -21,6 +38,10 @@ function SecuritySettings() {
         <input
           type="password"
           placeholder="Enter New Password"
+          value={newPassword}
+          onChange={(e) =>
+            setNewPassword(e.target.value)
+          }
         />
       </div>
 
@@ -29,10 +50,17 @@ function SecuritySettings() {
         <input
           type="password"
           placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) =>
+            setConfirmPassword(e.target.value)
+          }
         />
       </div>
 
-      <button className="update-password-btn">
+      <button
+        className="update-password-btn"
+        onClick={handleUpdate}
+      >
         Update Password
       </button>
 

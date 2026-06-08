@@ -8,7 +8,10 @@ import AppearanceSettings from "../../components/Settings/AppearanceSettings/App
 
 import "./Settings.css";
 
+import { useState } from "react";
 function Settings() {
+  const [emailNotifications,setEmailNotifications]=useState(true);
+  const [fullName,setFullName]=useState("");
   return (
     <div className="settings-layout">
 
