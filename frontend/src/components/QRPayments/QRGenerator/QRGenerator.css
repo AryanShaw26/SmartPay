@@ -108,6 +108,23 @@
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
+.qr-preview{
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    background:#0f2417;
+
+    border:1px solid #00d26a;
+
+    color:#00d26a;
+
+    text-align:center;
+
+    font-weight:600;
+}
 /* Mobile */
 
 @media (max-width: 768px) {

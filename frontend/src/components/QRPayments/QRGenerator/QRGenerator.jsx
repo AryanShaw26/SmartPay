@@ -1,9 +1,16 @@
 import "./QRGenerator.css";
 
-function QRGenerator() {
+function QRGenerator({
+  receiver,
+  amount,
+  note,
+  setReceiver,
+  setAmount,
+  setNote,
+  setQrGenerated
+}) {
   return (
     <div className="qr-generator">
-
       <div className="generator-header">
         <h2>Generate QR</h2>
       </div>
@@ -14,6 +21,7 @@ function QRGenerator() {
         <input
           type="number"
           placeholder="Enter Amount"
+          onChange={(e) => setAmount(e.target.value)}
         />
       </div>
 
@@ -23,6 +31,7 @@ function QRGenerator() {
         <input
           type="text"
           placeholder="Coffee Payment"
+          onChange={(e) => setNote(e.target.value)}
         />
       </div>
 
@@ -32,13 +41,17 @@ function QRGenerator() {
         <input
           type="text"
           placeholder="Enter Recipient Name"
+          onChange={(e) => setReceiver(e.target.value)}
         />
       </div>
 
-      <button className="generate-btn">
-        Generate QR
-      </button>
-
+      <button className="generate-btn"
+      onClick={()=>setQrGenerated(true)}>Generate QR</button>
+      {amount && (
+        <div className="qr-preview">
+          <p>QR Generated Successfully</p>
+        </div>
+      )}
     </div>
   );
 }

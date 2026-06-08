@@ -1,6 +1,6 @@
 import "./QRPaymentSummary.css";
 
-function QRPaymentSummary() {
+function QRPaymentSummary({receiver,amount,note}) {
   return (
     <div className="qr-payment-summary">
 
@@ -12,17 +12,17 @@ function QRPaymentSummary() {
 
         <div className="summary-item">
           <span>Amount</span>
-          <span>₹500</span>
+          <span>{amount || 0}</span>
         </div>
 
         <div className="summary-item">
           <span>Recipient</span>
-          <span>Raj Sharma</span>
+          <span>{receiver || "No receipient"}</span>
         </div>
 
         <div className="summary-item">
           <span>Description</span>
-          <span>Coffee Payment</span>
+          <span>{note || "No description"}</span>
         </div>
 
         <div className="summary-item">
@@ -32,13 +32,13 @@ function QRPaymentSummary() {
 
         <div className="summary-total">
           <span>Total</span>
-          <span>₹500</span>
+          <span>₹{amount ||0}</span>
         </div>
 
       </div>
 
       <div className="payment-status">
-        ✓ Ready For Payment
+        {amount?" ✓ Ready For Payment":"Enter Amount"}
       </div>
 
     </div>
