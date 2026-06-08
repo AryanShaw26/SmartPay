@@ -1,71 +1,47 @@
 import "./TransactionTable.css";
-function TransactionTable() {
+
+function TransactionTable({ transactions }) {
   return (
-    <>
-      <div className="table-container">
-        <h1>Transaction History</h1>
-        <div className="transaction-details">
-          <p>Date</p>
-          <p>Recipient</p>
-          <p>Amount</p>
-          <p>Type</p>
-          <p>Status</p>
-        </div>
-        <div className="transaction-row">
-          <span>5 Jun 2026</span>
+    <div className="table-container">
 
-          <span>Raj Sharma</span>
+      <h1>Transaction History</h1>
 
-          <span>₹5,000</span>
-
-          <span>Sent</span>
-
-          <span className="success">Success</span>
-        </div>
-
-        {/* Row 2 */}
-
-        <div className="transaction-row">
-          <span>4 Jun 2026</span>
-
-          <span>Aman Gupta</span>
-
-          <span>₹2,000</span>
-
-          <span>Sent</span>
-
-          <span className="success">Success</span>
-        </div>
-
-        {/* Row 3 */}
-
-        <div className="transaction-row">
-          <span>3 Jun 2026</span>
-
-          <span>Priya Singh</span>
-
-          <span>₹1,500</span>
-
-          <span>Received</span>
-
-          <span className="pending">Pending</span>
-        </div>
-
-        {/* Row 4 */}
-
-        <div className="transaction-row">
-          <span>2 Jun 2026</span>
-
-          <span>Rohit Das</span>
-
-          <span>₹3,000</span>
-
-          <span>Sent</span>
-
-          <span className="failed">Failed</span>
-        </div>
+      <div className="transaction-details">
+        <p>Date</p>
+        <p>Recipient</p>
+        <p>Amount</p>
+        <p>Type</p>
+        <p>Status</p>
       </div>
-    </>
+
+      {transactions.map((transaction) => (
+        <div
+          className="transaction-row"
+          key={transaction.id}
+        >
+          <span>{transaction.date}</span>
+
+          <span>{transaction.recipient}</span>
+
+          <span>₹{transaction.amount}</span>
+
+          <span>{transaction.type}</span>
+
+          <span
+            className={
+              transaction.status === "Success"
+                ? "success"
+                : transaction.status === "Pending"
+                ? "pending"
+                : "failed"
+            }
+          >
+            {transaction.status}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
+
 export default TransactionTable;
