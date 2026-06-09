@@ -119,11 +119,24 @@ def add_money(
 
     wallet.balance += data.amount
 
+    new_transaction = Transaction(
+        recipient="Wallet Topup",
+        amount=data.amount,
+        purpose="Add Money",
+        notes="Wallet Recharge",
+        status="Success"
+    )
+
+    db.add(new_transaction)
+
     db.commit()
 
     db.refresh(wallet)
 
-    return wallet
+    return {
+        "message": "Money Added Successfully",
+        "balance": wallet.balance
+    }
 
 @app.post("/register")
 def register_user(
@@ -186,8 +199,8 @@ def login_user(
         }
 
     return {
-        "message":
-        "Login Successful",
-        "user_id":
-        existing_user.id
-    }
+    "message": "Login Successful",
+    "user_id": existing_user.id,
+    "full_name": existing_user.full_name,
+    "email": existing_user.email
+}

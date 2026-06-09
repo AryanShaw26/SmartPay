@@ -9,6 +9,12 @@ import axios from "axios";
 function BalanceCard() {
   const [balance, setBalance] = useState(50000);
 
+  const [transactionsCount, setTransactionsCount] =
+    useState(0);
+
+  const [totalSent, setTotalSent] =
+    useState(0);
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/wallet")
@@ -16,72 +22,112 @@ function BalanceCard() {
         setBalance(response.data.balance);
       })
       .catch((error) => {
-        console.log("Error fetching wallet:", error);
+        console.log(
+          "Error fetching wallet:",
+          error
+        );
+      });
+
+    axios
+      .get(
+        "http://127.0.0.1:8000/transactions"
+      )
+      .then((response) => {
+        const transactions =
+          response.data;
+
+        setTransactionsCount(
+          transactions.length
+        );
+
+        const total =
+          transactions.reduce(
+            (sum, transaction) =>
+              sum +
+              Number(
+                transaction.amount
+              ),
+            0
+          );
+
+        setTotalSent(total);
+      })
+      .catch((error) => {
+        console.log(
+          "Error fetching transactions:",
+          error
+        );
       });
   }, []);
 
   return (
-    <>
-      <div className="balance-card">
-        <div className="balance-header">
-          <div className="title">
-            <h3>Total Balance</h3>
-          </div>
-
-          <div className="eye-icon">
-            <FaEye />
-          </div>
+    <div className="balance-card">
+      <div className="balance-header">
+        <div className="title">
+          <h3>Total Balance</h3>
         </div>
 
-        <div className="balance-amount">
-          <h1>
-            ₹
-            {Number(balance).toLocaleString("en-IN", {
+        <div className="eye-icon">
+          <FaEye />
+        </div>
+      </div>
+
+      <div className="balance-amount">
+        <h1>
+          ₹
+          {Number(balance).toLocaleString(
+            "en-IN",
+            {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
-            })}
-          </h1>
-        </div>
+            }
+          )}
+        </h1>
+      </div>
 
-        <div className="balance-actions">
-          <Link
-            to="/add-money"
-            className="add-money-btn"
-          >
-            <IoIosAddCircleOutline />
-            <span>Add Money</span>
-          </Link>
+      <div className="balance-actions">
+        <Link
+          to="/add-money"
+          className="add-money-btn"
+        >
+          <IoIosAddCircleOutline />
+          <span>Add Money</span>
+        </Link>
 
-          <Link
-            to="/send-money"
-            className="send-money-btn"
-          >
-            <IoIosSend />
-            <span>Send Money</span>
-          </Link>
-        </div>
+        <Link
+          to="/send-money"
+          className="send-money-btn"
+        >
+          <IoIosSend />
+          <span>Send Money</span>
+        </Link>
+      </div>
 
-        <div className="balance-summary">
-          <div className="income-box">
-            <div className="income-title">
-              Income
-            </div>
-            <div className="income-value">
-              +₹42,500
-            </div>
+      <div className="balance-summary">
+        <div className="summary-box">
+          <div className="summary-title">
+            Transactions
           </div>
 
-          <div className="expense-box">
-            <div className="expense-title">
-              Expenses
-            </div>
-            <div className="expense-value">
-              -₹17,820
-            </div>
+          <div className="summary-value">
+            {transactionsCount}
+          </div>
+        </div>
+
+        <div className="summary-box">
+          <div className="summary-title">
+            Total Sent
+          </div>
+
+          <div className="summary-value">
+            ₹
+            {Number(
+              totalSent
+            ).toLocaleString("en-IN")}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

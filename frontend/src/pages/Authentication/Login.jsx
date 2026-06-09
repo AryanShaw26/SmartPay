@@ -12,33 +12,55 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await axios.post(
+  try {
+
+    const response =
+      await axios.post(
         "http://127.0.0.1:8000/login",
         {
           email,
           password,
         }
       );
+      console.log(response.data);
 
-      if (
-        response.data.message ===
-        "Login Successful"
-      ) {
-        alert("Login Successful");
+    if (
+      response.data.message ===
+      "Login Successful"
+    ) {
 
-        navigate("/dashboard");
-      } else {
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
+      localStorage.setItem(
+        "userName",
+        response.data.full_name
+      );
 
-      alert("Login Failed");
+      localStorage.setItem(
+        "userEmail",
+        response.data.email
+      );
+
+      localStorage.setItem(
+        "userId",
+        response.data.user_id
+      );
+
+      navigate("/dashboard");
+    } else {
+      alert(response.data.message);
     }
-  };
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert(
+      "Unable to login"
+    );
+
+  }
+};
 
   return (
     <div className="login-container">

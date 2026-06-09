@@ -30,6 +30,7 @@
   display: flex;
 
   justify-content: space-between;
+
   align-items: center;
 
   margin-bottom: 20px;
@@ -44,7 +45,7 @@
 }
 
 .eye-icon {
-  color: #FFD700;
+  color: #ffd700;
 
   cursor: pointer;
 
@@ -86,6 +87,7 @@
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 10px;
@@ -101,12 +103,11 @@
   transition: 0.3s ease;
 }
 
-/* Add Money */
-
 .add-money-btn {
-  background: #FFD700;
+  background: #ffd700;
 
   color: black;
+
   text-decoration: none;
 }
 
@@ -116,25 +117,24 @@
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
-/* Send Money */
-
 .send-money-btn {
   background: transparent;
 
   color: white;
 
   border: 1px solid rgba(255, 215, 0, 0.3);
+
   text-decoration: none;
 }
 
 .send-money-btn:hover {
   background: rgba(255, 215, 0, 0.08);
 
-  color: #FFD700;
+  color: #ffd700;
 }
 
 /* ==========================
-   SUMMARY
+   SUMMARY SECTION
 ========================== */
 
 .balance-summary {
@@ -145,58 +145,36 @@
   gap: 15px;
 }
 
-/* Income */
+.summary-box {
+  background: #1a1a1a;
 
-.income-box {
-  background: rgba(34, 197, 94, 0.1);
-
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.15);
 
   border-radius: 15px;
 
-  padding: 15px;
+  padding: 18px;
+
+  transition: 0.3s ease;
 }
 
-.income-title {
+.summary-box:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+
+  transform: translateY(-2px);
+}
+
+.summary-title {
   color: #9ca3af;
 
-  margin-bottom: 8px;
-
   font-size: 0.9rem;
+
+  margin-bottom: 10px;
 }
 
-.income-value {
-  color: #22c55e;
+.summary-value {
+  color: #ffd700;
 
-  font-size: 1.2rem;
-
-  font-weight: 600;
-}
-
-/* Expense */
-
-.expense-box {
-  background: rgba(239, 68, 68, 0.1);
-
-  border: 1px solid rgba(239, 68, 68, 0.2);
-
-  border-radius: 15px;
-
-  padding: 15px;
-}
-
-.expense-title {
-  color: #9ca3af;
-
-  margin-bottom: 8px;
-
-  font-size: 0.9rem;
-}
-
-.expense-value {
-  color: #ef4444;
-
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 
   font-weight: 600;
 }
@@ -218,5 +196,4 @@
   .balance-amount h1 {
     font-size: 2rem;
   }
-
 }

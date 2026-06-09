@@ -3,7 +3,6 @@ import "./Dashboard.css";
 import Sidebar from "./Sidebar/Sidebar";
 import Header from "./Header/Header";
 import BalanceCard from "./BalanceCard/BalanceCard";
-import QuickActions from "./QuickActions/QuickActions";
 import RecentTransactions from "./RecentTransactions/RecentTransactions";
 import Analytics from "./Analytics/Analytics";
 function Dashboard() {
@@ -16,9 +15,11 @@ function Dashboard() {
 
         <div className="top-cards">
           <BalanceCard />
-          <QuickActions />
-          <RecentTransactions></RecentTransactions>
-          <Analytics></Analytics>
+        </div>
+
+        <div className="bottom-cards">
+          <RecentTransactions />
+          <Analytics />
         </div>
       </div>
     </div>
