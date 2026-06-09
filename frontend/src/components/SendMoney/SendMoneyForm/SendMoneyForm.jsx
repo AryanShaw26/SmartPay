@@ -1,23 +1,42 @@
 import "./SendMoneyForm.css";
 import { useState } from "react";
-
+import axios from "axios";
 function SendMoneyForm() {
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
   const [purpose, setPurpose] = useState("");
   const [notes, setNotes] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
 
-    console.log("Recipient:", recipient);
-    console.log("Amount:", amount);
-    console.log("Purpose:", purpose);
-    console.log("Notes:", notes);
+  e.preventDefault();
 
-    alert("Money Transfer Initiated!");
-  };
+  try {
 
+    const response = await axios.post(
+      "http://127.0.0.1:8000/transactions",
+
+      {
+        recipient,
+        amount,
+        purpose,
+        notes,
+      }
+    );
+
+    console.log(response.data);
+
+    alert("Transaction Successful");
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Transaction Failed");
+
+  }
+
+};
   return (
     <form className="send-money-form" onSubmit={handleSubmit}>
       <h2>Send Money</h2>

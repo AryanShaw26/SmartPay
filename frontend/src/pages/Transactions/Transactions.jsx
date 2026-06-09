@@ -4,47 +4,23 @@ import Header from "../Dashboard/Header/Header";
 import TransactionStats from "../../components/Transactions/TransactionStats/TransactionStats";
 import TransactionsFilters from "../../components/Transactions/TransactionFilters/TransactionFilters";
 import TransactionTable from "../../components/Transactions/TransactionTable/TransactionTable";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 function Transactions() {
   const [selectedFilter, setSelectedFilter] = useState("All");
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [transactions] = useState([
-    {
-      id: 1,
-      date: "5 Jun 2026",
-      recipient: "Raj Sharma",
-      amount: 5000,
-      type: "Sent",
-      status: "Success",
-    },
-    {
-      id: 2,
-      date: "4 Jun 2026",
-      recipient: "Aman Gupta",
-      amount: 2000,
-      type: "Sent",
-      status: "Success",
-    },
-    {
-      id: 3,
-      date: "3 Jun 2026",
-      recipient: "Priya Singh",
-      amount: 1500,
-      type: "Received",
-      status: "Pending",
-    },
-    {
-      id: 4,
-      date: "2 Jun 2026",
-      recipient: "Rohit Das",
-      amount: 3000,
-      type: "Sent",
-      status: "Failed",
-    },
-  ]);
+  const [transactions,setTransactions]=useState([]);
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/transactions")
+    .then((response)=>{
+      setTransactions(response.data);
+    })
+    .catch((error)=>{
+      console.log("Error:",error);
+    });
+  },[]);
 
   const filteredTransactions = transactions.filter(
     (transaction) => {
