@@ -1,70 +1,40 @@
 import "./Contact.css";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 
 function Contact() {
   return (
-    <section className="contact-section" id="contact">
-
+    <section
+      className="contact-section"
+      id="contact"
+    >
       <div className="contact-header">
         <h2>
-          Get In <span>Touch</span>
+          Contact <span>Me</span>
         </h2>
 
         <p>
-          Have questions or feedback? We'd love to hear from you.
+          For collaborations, opportunities,
+          or project discussions, feel free
+          to reach out.
         </p>
       </div>
 
       <div className="contact-container">
-
-        {/* Left */}
-
         <div className="contact-info">
 
-          <div className="info-card">
+          <a
+            href="mailto:aryanshaw344@gmail.com"
+            className="info-card"
+          >
             <FaEnvelope />
-            <span>aryanshaw344@gmail..com</span>
-          </div>
 
-          <div className="info-card">
-            <FaPhone />
-            <span>+91 74393 XXXX</span>
-          </div>
-
-          <div className="info-card">
-            <FaMapMarkerAlt />
-            <span>Kolkata, India</span>
-          </div>
+            <span>
+              aryanshaw344@gmail.com
+            </span>
+          </a>
 
         </div>
-
-        {/* Right */}
-
-        <form className="contact-form">
-
-          <input
-            type="text"
-            placeholder="Your Name"
-          />
-
-          <input
-            type="email"
-            placeholder="Your Email"
-          />
-
-          <textarea
-            rows="6"
-            placeholder="Your Message"
-          />
-
-          <button type="submit">
-            Send Message
-          </button>
-
-        </form>
-
       </div>
-
     </section>
   );
 }

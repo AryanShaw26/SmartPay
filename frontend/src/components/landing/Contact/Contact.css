@@ -45,8 +45,13 @@
   display:flex;
   gap:15px;
   align-items:center;
+  text-decoration: none;
 }
-
+.info-card:hover{
+  border-color: #FFD700;
+  transform: translate(-3px);
+  transition: 0.3s;
+}
 .info-card svg{
   color:#FFD700;
   font-size:1.3rem;

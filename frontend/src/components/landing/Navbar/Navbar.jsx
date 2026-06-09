@@ -16,13 +16,13 @@ function Navbar() {
             </a>
           </li>
           <li>
-            <a href="*features">Features</a>
+            <a href="#features">Features</a>
           </li>
           <li>
-            <a href="HowItWorks">HowItWorks</a>
+            <a href="#how-it-works">HowItWorks</a>
           </li>
           <li>
-            <a href="AboutUs">About Us</a>
+            <a href="#about">About Us</a>
           </li>
           <li>
             <a href="#contact">Contact</a>
