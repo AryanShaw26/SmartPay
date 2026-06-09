@@ -28,3 +28,27 @@ class Transaction(Base):
         DateTime,
         default=datetime.utcnow
     )
+
+
+class Wallet(Base):
+    __tablename__ = "wallet"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    balance = Column(
+        Float,
+        default=50000
+    )
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    full_name = Column(String)
+
+    email = Column(String, unique=True)
+
+    phone_number = Column(String, unique=True)
+
+    password = Column(String)
