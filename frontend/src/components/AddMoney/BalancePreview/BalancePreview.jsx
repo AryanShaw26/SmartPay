@@ -1,15 +1,47 @@
 import "./BalancePreview.css";
 import { FaEye } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function BalancePreview() {
+
+  const [balance, setBalance] =
+    useState(50000);
+
+  useEffect(() => {
+
+    axios
+      .get(
+        "http://127.0.0.1:8000/wallet"
+      )
+      .then((response) => {
+
+        setBalance(
+          response.data.balance
+        );
+
+      })
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, []);
+
   return (
     <div className="balance-preview">
 
       <div className="balance-top">
 
         <div>
-          <h3>Current Wallet Balance</h3>
-          <p>Available Funds</p>
+          <h3>
+            Current Wallet Balance
+          </h3>
+
+          <p>
+            Available Funds
+          </p>
         </div>
 
         <div className="eye-icon">
@@ -19,14 +51,17 @@ function BalancePreview() {
       </div>
 
       <div className="balance-amount">
-        ₹24,680.50
+        ₹
+        {Number(balance).toLocaleString(
+          "en-IN",
+          {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        )}
       </div>
 
       <div className="balance-footer">
-
-        <div className="balance-growth">
-          +12.5% from last month
-        </div>
 
         <div className="balance-update">
           Updated Just Now

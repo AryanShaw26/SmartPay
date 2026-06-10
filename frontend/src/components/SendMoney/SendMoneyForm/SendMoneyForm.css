@@ -118,36 +118,6 @@
 .send-money-form textarea::placeholder {
     color: #888;
 }
-.transfer-preview {
-    margin-top: 20px;
-
-    padding: 20px;
-
-    background: #1a1a1a;
-
-    border: 1px solid rgba(255, 215, 0, 0.15);
-
-    border-radius: 12px;
-}
-
-.transfer-preview h3 {
-    color: #FFD700;
-
-    margin-bottom: 15px;
-}
-
-.transfer-preview p {
-    color: white;
-
-    margin-bottom: 8px;
-
-    font-size: 0.95rem;
-}
-
-.transfer-preview strong {
-    color: #FFD700;
-}
-
 /* Mobile */
 
 @media (max-width: 768px) {

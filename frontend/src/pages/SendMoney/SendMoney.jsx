@@ -1,6 +1,5 @@
 import Sidebar from "../Dashboard/Sidebar/Sidebar";
 import Header from "../Dashboard/Header/Header";
-import RecipientCard from "../../components/SendMoney/RecipientCard/RecipientCard";
 import SendMoneyForm from "../../components/SendMoney/SendMoneyForm/SendMoneyForm";
 import "./SendMoney.css";
 import TransferSummary from "../../components/SendMoney/TransferSummary/TransferSummary";
@@ -14,12 +13,10 @@ function SendMoney() {
         <Header />
 
         <div className="recipient-content">
-          <RecipientCard />
         </div>
         <div className="sendmoney-form-content">
           <div className="sendmoney-row">
             <SendMoneyForm></SendMoneyForm>
-            <TransferSummary></TransferSummary>
           </div>
         </div>
         <RecentRecipients></RecentRecipients>

@@ -8,6 +8,9 @@ class TransactionCreate(BaseModel):
     purpose: str
     notes: str
 
+    user_id: int
+    password: str
+
 
 class TransactionResponse(TransactionCreate):
     id: int
@@ -27,7 +30,8 @@ class WalletResponse(BaseModel):
 
 class AddMoneyRequest(BaseModel):
     amount: float
-
+    email:str
+    password:str
 class UserRegister(BaseModel):
     full_name: str
     email: str

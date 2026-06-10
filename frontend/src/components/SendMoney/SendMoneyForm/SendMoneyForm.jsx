@@ -1,115 +1,112 @@
 import "./SendMoneyForm.css";
 import { useState } from "react";
 import axios from "axios";
+
 function SendMoneyForm() {
   const [recipient, setRecipient] = useState("");
+
   const [amount, setAmount] = useState("");
+
   const [purpose, setPurpose] = useState("");
+
   const [notes, setNotes] = useState("");
 
+  const [password, setPassword] = useState("");
+
   const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  e.preventDefault();
-
-  try {
-
-    const response = await axios.post(
-      "http://127.0.0.1:8000/transactions",
-
-      {
+    try {
+      const payload = {
         recipient,
-        amount,
+        amount: Number(amount),
         purpose,
         notes,
-      }
-    );
+        password,
+        user_id: Number(localStorage.getItem("user_id")),
+      };
 
-    console.log(response.data);
+      console.log("Sending Payload:", payload);
+      console.log("USER ID =", localStorage.getItem("user_id"));
+      const response = await axios.post(
+        "http://127.0.0.1:8000/transactions",
+        payload,
+      );
 
-    alert("Transaction Successful");
+      alert(response.data.message);
 
-  } catch (error) {
+      setRecipient("");
+      setAmount("");
+      setPurpose("");
+      setNotes("");
+      setPassword("");
+    } catch (error) {
+      console.log("Backend Error:", error.response?.data);
 
-    console.log(error);
+      alert(
+        error.response?.data?.detail ||
+          error.response?.data?.message ||
+          "Transaction Failed",
+      );
+    }
+  };
 
-    alert("Transaction Failed");
-
-  }
-
-};
   return (
-    <form className="send-money-form" onSubmit={handleSubmit}>
+    <div className="send-money-form">
       <h2>Send Money</h2>
 
-      {/* Recipient */}
+      <form onSubmit={handleSubmit}>
+        <label>Recipient</label>
 
-      <label>Recipient</label>
+        <input
+          type="text"
+          placeholder="Enter Recipient Name"
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
+          required
+        />
 
-      <input
-        type="text"
-        placeholder="Enter Recipient Name"
-        value={recipient}
-        onChange={(e) => setRecipient(e.target.value)}
-      />
+        <label>Amount</label>
 
-      {/* Amount */}
+        <input
+          type="number"
+          placeholder="₹ Enter Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
 
-      <label>Amount</label>
+        <label>Purpose</label>
 
-      <input
-        type="number"
-        placeholder="₹ Enter Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Enter Purpose"
+          value={purpose}
+          onChange={(e) => setPurpose(e.target.value)}
+          required
+        />
 
-      {/* Purpose */}
+        <label>Notes</label>
 
-      <label>Purpose</label>
+        <textarea
+          placeholder="Optional Message"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+        />
 
-      <input
-        type="text"
-        placeholder="Enter Purpose"
-        value={purpose}
-        onChange={(e) => setPurpose(e.target.value)}
-      />
+        <label>Transaction Password</label>
 
-      {/* Notes */}
+        <input
+          type="password"
+          placeholder="Enter Login Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      <label>Notes</label>
-
-      <textarea
-        placeholder="Optional Message"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-      />
-
-      <button type="submit">
-        Send Money
-      </button>
-
-      {/* Live Preview */}
-
-      <div className="transfer-preview">
-        <h3>Transfer Preview</h3>
-
-        <p>
-          <strong>Recipient:</strong> {recipient}
-        </p>
-
-        <p>
-          <strong>Amount:</strong> ₹{amount}
-        </p>
-
-        <p>
-          <strong>Purpose:</strong> {purpose}
-        </p>
-
-        <p>
-          <strong>Notes:</strong> {notes}
-        </p>
-      </div>
-    </form>
+        <button type="submit">Send Money</button>
+      </form>
+    </div>
   );
 }
 

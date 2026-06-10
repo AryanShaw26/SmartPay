@@ -82,12 +82,6 @@
   gap: 10px;
 }
 
-.balance-growth {
-  color: #00d26a;
-
-  font-weight: 600;
-}
-
 .balance-update {
   color: #888;
 
@@ -107,9 +101,11 @@
   }
 
   .balance-footer {
-    flex-direction: column;
+  display: flex;
 
-    align-items: flex-start;
-  }
+  justify-content: flex-end;
+
+  align-items: center;
+}
 
 }

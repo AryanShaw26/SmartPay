@@ -1,35 +1,81 @@
 import "./RecentRecipients.css";
-import { FaUserCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function RecentRecipients() {
+
+  const [recipients, setRecipients] =
+    useState([]);
+
+  useEffect(() => {
+
+    axios
+      .get(
+        "http://127.0.0.1:8000/recent-recipients"
+      )
+      .then((response) => {
+
+        setRecipients(
+          response.data
+        );
+
+      })
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, []);
+
   return (
     <div className="recent-recipients">
 
       <div className="recipients-header">
-        <h2>Recent Recipients</h2>
+        <h2>
+          Recent Recipients
+        </h2>
       </div>
 
       <div className="recipients-list">
 
-        <div className="recipient-item">
-          <FaUserCircle />
-          <span>Raj Sharma</span>
-        </div>
+        {recipients.length === 0 ? (
 
-        <div className="recipient-item">
-          <FaUserCircle />
-          <span>Aman Gupta</span>
-        </div>
+          <p
+            style={{
+              color: "#888",
+              textAlign: "center",
+            }}
+          >
+            No Recipients Found
+          </p>
 
-        <div className="recipient-item">
-          <FaUserCircle />
-          <span>Priya Singh</span>
-        </div>
+        ) : (
 
-        <div className="recipient-item">
-          <FaUserCircle />
-          <span>Rohit Das</span>
-        </div>
+          recipients.map((recipient) => (
+
+            <div
+              key={recipient.id}
+              className="recipient-item"
+            >
+
+              <div>
+
+                <strong>
+                  {recipient.recipient}
+                </strong>
+
+                <p>
+                  ₹{recipient.amount}
+                </p>
+
+              </div>
+
+            </div>
+
+          ))
+
+        )}
 
       </div>
 

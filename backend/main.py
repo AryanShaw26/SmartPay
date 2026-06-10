@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -59,11 +59,33 @@ def get_transactions(
 
 
 # Create Transaction
+from fastapi import HTTPException
+
 @app.post("/transactions")
 def create_transaction(
     transaction: TransactionCreate,
     db: Session = Depends(get_db)
 ):
+
+    user = (
+        db.query(User)
+        .filter(
+            User.id == transaction.user_id
+        )
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+
+    if user.password != transaction.password:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect Password"
+        )
 
     wallet = (
         db.query(Wallet)
@@ -71,13 +93,15 @@ def create_transaction(
     )
 
     if wallet.balance < transaction.amount:
-        return {
-            "message":
-            "Insufficient Balance"
-        }
+        raise HTTPException(
+            status_code=400,
+            detail="Insufficient Balance"
+        )
 
+    # Deduct balance
     wallet.balance -= transaction.amount
 
+    # Save transaction
     new_transaction = Transaction(
         recipient=transaction.recipient,
         amount=transaction.amount,
@@ -92,7 +116,11 @@ def create_transaction(
 
     db.refresh(new_transaction)
 
-    return new_transaction
+    return {
+        "message": "Money Sent Successfully",
+        "transaction": new_transaction,
+        "remaining_balance": wallet.balance
+    }
 
 @app.get("/wallet")
 def get_wallet(
@@ -111,6 +139,26 @@ def add_money(
     data: AddMoneyRequest,
     db: Session = Depends(get_db)
 ):
+
+    user = (
+        db.query(User)
+        .filter(
+            User.email == data.email
+        )
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+
+    if user.password != data.password:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect Password"
+        )
 
     wallet = (
         db.query(Wallet)
@@ -137,6 +185,24 @@ def add_money(
         "message": "Money Added Successfully",
         "balance": wallet.balance
     }
+@app.get("/recent-topups")
+def recent_topups(
+    db: Session = Depends(get_db)
+):
+
+    topups = (
+        db.query(Transaction)
+        .filter(
+            Transaction.purpose == "Add Money"
+        )
+        .order_by(
+            Transaction.date.desc()
+        )
+        .limit(5)
+        .all()
+    )
+
+    return topups
 
 @app.post("/register")
 def register_user(
@@ -204,3 +270,22 @@ def login_user(
     "full_name": existing_user.full_name,
     "email": existing_user.email
 }
+
+@app.get("/recent-recipients")
+def recent_recipients(
+    db: Session = Depends(get_db)
+):
+
+    recipients = (
+        db.query(Transaction)
+        .filter(
+            Transaction.purpose != "Add Money"
+        )
+        .order_by(
+            Transaction.date.desc()
+        )
+        .limit(5)
+        .all()
+    )
+
+    return recipients

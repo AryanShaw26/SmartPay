@@ -175,11 +175,11 @@
 }
 
 .credit {
-  color: #22c55e;
+  color: #22c55e !important;
 }
 
 .debit {
-  color: #ef4444;
+  color: #ef4444 !important;
 }
 
 /* ==========================

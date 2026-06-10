@@ -6,8 +6,11 @@ function TransactionItem({
   name,
   date,
   amount,
-  status,
+  purpose,
 }) {
+  const isTopup =
+    purpose === "Add Money";
+
   return (
     <div className="transaction-item">
       <div className="transaction-left">
@@ -37,12 +40,12 @@ function TransactionItem({
 
       <div
         className={`transaction-amount ${
-          status === "Success"
+          isTopup
             ? "credit"
             : "debit"
         }`}
       >
-        ₹{amount}
+        {isTopup ? "+" : "-"}₹{amount}
       </div>
     </div>
   );
@@ -113,8 +116,8 @@ function RecentTransactions() {
                 amount={
                   transaction.amount
                 }
-                status={
-                  transaction.status
+                purpose={
+                  transaction.purpose
                 }
               />
             )

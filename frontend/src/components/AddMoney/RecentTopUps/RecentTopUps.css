@@ -47,3 +47,15 @@
 .topup-item p:last-child {
     color: #888;
 }
+
+.topups-list:empty::after {
+  content: "No Top-Ups Yet";
+
+  color: #888;
+
+  display: block;
+
+  text-align: center;
+
+  padding: 20px;
+}

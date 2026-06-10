@@ -1,32 +1,72 @@
-import "./RecentTopUPs.css";
-function RecentTopUps() {
-  return (
-    <>
-      <div className="recent-topups-container">
-        <div className="topups-header">
-          <h2>Recent Top-Ups</h2>
-          <div className="topups-list">
-            <div className="topup-item">
-                <p>₹5,000</p>
-                <p>Today</p>
+import "./RecentTopUps.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-            </div>
-            <div className="topup-item">
-                <p>₹2,000</p>
-                <p>Yesterday</p>
-            </div>
-            <div className="topup-item">
-                <p>₹1,000</p>
-                <p>2 Days Ago</p>
-            </div>
-            <div className="topup-item">
-                <p>₹500</p>
-                <p>Last Week</p>
-            </div>
-          </div>
-        </div>
+function RecentTopUps() {
+
+  const [topups, setTopups] =
+    useState([]);
+
+  useEffect(() => {
+
+    axios
+      .get(
+        "http://127.0.0.1:8000/recent-topups"
+      )
+      .then((response) => {
+
+        setTopups(response.data);
+
+      })
+      .catch((error) => {
+
+        console.log(error);
+
+      });
+
+  }, []);
+
+  return (
+    <div className="recent-topups-container">
+
+      <div className="topups-header">
+        <h2>
+          Recent Top-Ups
+        </h2>
       </div>
-    </>
+
+      <div className="topups-list">
+
+        {topups.map((topup) => (
+
+          <div
+            className="topup-item"
+            key={topup.id}
+          >
+
+            <p>
+              ₹
+              {Number(
+                topup.amount
+              ).toLocaleString(
+                "en-IN"
+              )}
+            </p>
+
+            <p>
+              {new Date(
+                topup.date
+              ).toLocaleDateString()}
+            </p>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    </div>
   );
 }
+
 export default RecentTopUps;

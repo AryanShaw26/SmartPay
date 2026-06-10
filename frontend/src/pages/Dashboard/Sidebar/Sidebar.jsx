@@ -23,7 +23,7 @@ function Sidebar() {
           <img src={logo} alt="smartpay-logo" className="sidebar-logo" />
         </div>
         <div className="sidebar-menu">
-          <Link to="/" className="sidebar-item active">
+          <Link to="/dashboard" className="sidebar-item active">
             <MdSpaceDashboard />
             <span>Dashboard</span>
           </Link>

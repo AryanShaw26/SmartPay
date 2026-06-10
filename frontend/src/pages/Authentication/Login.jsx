@@ -12,55 +12,30 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-
-    const response =
-      await axios.post(
-        "http://127.0.0.1:8000/login",
-        {
-          email,
-          password,
-        }
-      );
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/login", {
+        email,
+        password,
+      });
       console.log(response.data);
 
-    if (
-      response.data.message ===
-      "Login Successful"
-    ) {
+      if (response.data.message === "Login Successful") {
+        localStorage.setItem("user_id", response.data.user_id);
 
-      localStorage.setItem(
-        "userName",
-        response.data.full_name
-      );
+        localStorage.setItem("full_name", response.data.full_name);
 
-      localStorage.setItem(
-        "userEmail",
-        response.data.email
-      );
+        localStorage.setItem("email", response.data.email);
 
-      localStorage.setItem(
-        "userId",
-        response.data.user_id
-      );
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
 
-      navigate("/dashboard");
-    } else {
-      alert(response.data.message);
+      alert("Unable to login");
     }
-
-  } catch (error) {
-
-    console.log(error);
-
-    alert(
-      "Unable to login"
-    );
-
-  }
-};
+  };
 
   return (
     <div className="login-container">
@@ -72,15 +47,10 @@ function Login() {
 
           <h2>Welcome Back</h2>
 
-          <p>
-            Login to access your wallet and transactions.
-          </p>
+          <p>Login to access your wallet and transactions.</p>
         </div>
 
-        <form
-          className="login-form"
-          onSubmit={handleSubmit}
-        >
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="input-group">
             <FaEnvelope className="input-icon" />
 
@@ -88,9 +58,7 @@ function Login() {
               type="email"
               placeholder="Email Address"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -102,9 +70,7 @@ function Login() {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -115,25 +81,17 @@ function Login() {
               Remember Me
             </label>
 
-            <a href="#">
-              Forgot Password?
-            </a>
+            <a href="#">Forgot Password?</a>
           </div>
 
-          <button
-            type="submit"
-            className="login-btn"
-          >
+          <button type="submit" className="login-btn">
             Login
           </button>
         </form>
 
         <div className="login-footer">
           Don't have an account?
-
-          <Link to="/register">
-            Register
-          </Link>
+          <Link to="/register">Register</Link>
         </div>
       </div>
     </div>

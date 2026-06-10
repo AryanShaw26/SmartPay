@@ -4,7 +4,6 @@ import AddMoneyForm from "../../components/AddMoney/AddMoneyForm/AddMoneyForm";
 
 import "./AddMoney.css";
 import BalancePreview from "../../components/AddMoney/BalancePreview/BalancePreview";
-import PaymentMethods from "../../components/AddMoney/PaymentMethods/PaymentMethods";
 import RecentTopUps from "../../components/AddMoney/RecentTopUps/RecentTopUps";
 function AddMoney() {
   return (
@@ -22,7 +21,6 @@ function AddMoney() {
           <AddMoneyForm />
         </div>
         <div className="payment-contents">
-          <PaymentMethods></PaymentMethods>
           <RecentTopUps></RecentTopUps>
         </div>
 
