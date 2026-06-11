@@ -1,45 +1,61 @@
 import "./Transactions.css";
 import Sidebar from "../Dashboard/Sidebar/Sidebar";
 import Header from "../Dashboard/Header/Header";
-import TransactionStats from "../../components/Transactions/TransactionStats/TransactionStats";
-import TransactionsFilters from "../../components/Transactions/TransactionFilters/TransactionFilters";
 import TransactionTable from "../../components/Transactions/TransactionTable/TransactionTable";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 function Transactions() {
-  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [transactions, setTransactions] =
+    useState([]);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] =
+    useState("");
 
-  const [transactions,setTransactions]=useState([]);
-  useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/transactions")
-    .then((response)=>{
-      setTransactions(response.data);
-    })
-    .catch((error)=>{
-      console.log("Error:",error);
-    });
-  },[]);
+  useEffect(() => {
+    const userId =
+      localStorage.getItem("user_id");
 
-  const filteredTransactions = transactions.filter(
-    (transaction) => {
-      const matchesFilter =
-        selectedFilter === "All" ||
-        transaction.type === selectedFilter ||
-        transaction.status === selectedFilter;
+    axios
+      .get(
+        `http://127.0.0.1:8000/transactions/${userId}`
+      )
+      .then((response) => {
+        setTransactions(
+          response.data
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-      const matchesSearch =
-        transaction.recipient
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        transaction.status
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
+  const filteredTransactions =
+    transactions.filter(
+      (transaction) => {
+        const recipientMatch =
+          transaction.recipient
+            .toLowerCase()
+            .includes(
+              searchTerm.toLowerCase()
+            );
 
-      return matchesFilter && matchesSearch;
-    }
-  );
+        const dateMatch =
+          new Date(
+            transaction.date
+          )
+            .toLocaleDateString(
+              "en-IN"
+            )
+            .includes(searchTerm);
+
+        return (
+          recipientMatch ||
+          dateMatch
+        );
+      }
+    );
 
   return (
     <div className="transactions-layout">
@@ -48,17 +64,23 @@ function Transactions() {
       <div className="transactions-main">
         <Header />
 
-        <TransactionStats />
-
-        <TransactionsFilters
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-        />
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search by recipient or date..."
+            value={searchTerm}
+            onChange={(e) =>
+              setSearchTerm(
+                e.target.value
+              )
+            }
+          />
+        </div>
 
         <TransactionTable
-          transactions={filteredTransactions}
+          transactions={
+            filteredTransactions
+          }
         />
       </div>
     </div>

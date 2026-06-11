@@ -1,6 +1,8 @@
 import "./TransactionTable.css";
 
-function TransactionTable({ transactions }) {
+function TransactionTable({
+  transactions,
+}) {
   return (
     <div className="table-container">
       <h1>Transaction History</h1>
@@ -14,48 +16,69 @@ function TransactionTable({ transactions }) {
       </div>
 
       {transactions.length === 0 ? (
-        <div className="no-transactions">
+        <div
+          style={{
+            color: "white",
+            textAlign: "center",
+            marginTop: "20px",
+          }}
+        >
           No Transactions Found
         </div>
       ) : (
-        transactions.map((transaction) => (
-          <div
-            className="transaction-row"
-            key={transaction.id}
-          >
-            <span>
-              {transaction.date
-                ? new Date(
+        transactions.map(
+          (transaction) => {
+            const isTopup =
+              transaction.recipient ===
+              "Wallet Topup";
+
+            return (
+              <div
+                className="transaction-row"
+                key={transaction.id}
+              >
+                <span>
+                  {new Date(
                     transaction.date
-                  ).toLocaleDateString()
-                : "N/A"}
-            </span>
+                  ).toLocaleString(
+                    "en-IN"
+                  )}
+                </span>
 
-            <span>
-              {transaction.recipient}
-            </span>
+                <span>
+                  {
+                    transaction.recipient
+                  }
+                </span>
 
-            <span>
-              ₹{transaction.amount}
-            </span>
+                <span
+                  className={
+                    isTopup
+                      ? "credit"
+                      : "debit"
+                  }
+                >
+                  {isTopup
+                    ? "+₹"
+                    : "-₹"}
+                  {transaction.amount}
+                </span>
 
-            <span>
-              {transaction.type || "Sent"}
-            </span>
+                <span>
+                  {isTopup
+                    ? "Credit"
+                    : "Debit"}
+                </span>
 
-            <span
-              className={
-                transaction.status === "Success"
-                  ? "success"
-                  : transaction.status === "Pending"
-                  ? "pending"
-                  : "failed"
-              }
-            >
-              {transaction.status}
-            </span>
-          </div>
-        ))
+                <span className="success">
+                  {
+                    transaction.status
+                  }
+                </span>
+              </div>
+            );
+          }
+        )
       )}
     </div>
   );

@@ -56,3 +56,12 @@
 .failed{
     color:#ff4d4d;
 }
+.credit {
+  color: #00d26a;
+  font-weight: bold;
+}
+
+.debit {
+  color: #ff4d4d;
+  font-weight: bold;
+}
