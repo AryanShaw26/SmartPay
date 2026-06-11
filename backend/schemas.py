@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 from datetime import datetime
-
+from decimal import Decimal
 
 class TransactionCreate(BaseModel):
     recipient: str
-    amount: float
+    amount: Decimal
     purpose: str
     notes: str
 
@@ -29,8 +29,8 @@ class WalletResponse(BaseModel):
 
 
 class AddMoneyRequest(BaseModel):
-    amount: float
-    email:str
+    user_id:int
+    amount: Decimal
     password:str
 class UserRegister(BaseModel):
     full_name: str

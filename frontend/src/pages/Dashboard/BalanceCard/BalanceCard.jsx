@@ -9,56 +9,57 @@ import axios from "axios";
 function BalanceCard() {
   const [balance, setBalance] = useState(50000);
 
-  const [transactionsCount, setTransactionsCount] =
-    useState(0);
+  const [transactionsCount, setTransactionsCount] = useState(0);
 
-  const [totalSent, setTotalSent] =
-    useState(0);
+  const [totalSent, setTotalSent] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/wallet")
-      .then((response) => {
-        setBalance(response.data.balance);
-      })
-      .catch((error) => {
-        console.log(
-          "Error fetching wallet:",
-          error
+  const userId =
+    localStorage.getItem("user_id");
+
+  axios
+    .get(
+      `http://127.0.0.1:8000/wallet/${userId}`
+    )
+    .then((response) => {
+      setBalance(response.data.balance);
+    })
+    .catch((error) => {
+      console.log(
+        "Error fetching wallet:",
+        error
+      );
+    });
+
+  axios
+    .get(
+      `http://127.0.0.1:8000/transactions/${userId}`
+    )
+    .then((response) => {
+      const transactions =
+        response.data;
+
+      setTransactionsCount(
+        transactions.length
+      );
+
+      const total =
+        transactions.reduce(
+          (sum, transaction) =>
+            sum +
+            Number(transaction.amount),
+          0
         );
-      });
 
-    axios
-      .get(
-        "http://127.0.0.1:8000/transactions"
-      )
-      .then((response) => {
-        const transactions =
-          response.data;
-
-        setTransactionsCount(
-          transactions.length
-        );
-
-        const total =
-          transactions.reduce(
-            (sum, transaction) =>
-              sum +
-              Number(
-                transaction.amount
-              ),
-            0
-          );
-
-        setTotalSent(total);
-      })
-      .catch((error) => {
-        console.log(
-          "Error fetching transactions:",
-          error
-        );
-      });
-  }, []);
+      setTotalSent(total);
+    })
+    .catch((error) => {
+      console.log(
+        "Error fetching transactions:",
+        error
+      );
+    });
+}, []);
 
   return (
     <div className="balance-card">
@@ -75,29 +76,20 @@ function BalanceCard() {
       <div className="balance-amount">
         <h1>
           ₹
-          {Number(balance).toLocaleString(
-            "en-IN",
-            {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }
-          )}
+          {Number(balance).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
         </h1>
       </div>
 
       <div className="balance-actions">
-        <Link
-          to="/add-money"
-          className="add-money-btn"
-        >
+        <Link to="/add-money" className="add-money-btn">
           <IoIosAddCircleOutline />
           <span>Add Money</span>
         </Link>
 
-        <Link
-          to="/send-money"
-          className="send-money-btn"
-        >
+        <Link to="/send-money" className="send-money-btn">
           <IoIosSend />
           <span>Send Money</span>
         </Link>
@@ -105,25 +97,16 @@ function BalanceCard() {
 
       <div className="balance-summary">
         <div className="summary-box">
-          <div className="summary-title">
-            Transactions
-          </div>
+          <div className="summary-title">Transactions</div>
 
-          <div className="summary-value">
-            {transactionsCount}
-          </div>
+          <div className="summary-value">{transactionsCount}</div>
         </div>
 
         <div className="summary-box">
-          <div className="summary-title">
-            Total Sent
-          </div>
+          <div className="summary-title">Total Sent</div>
 
           <div className="summary-value">
-            ₹
-            {Number(
-              totalSent
-            ).toLocaleString("en-IN")}
+            ₹{Number(totalSent).toLocaleString("en-IN")}
           </div>
         </div>
       </div>

@@ -8,26 +8,31 @@ function BalancePreview() {
   const [balance, setBalance] =
     useState(50000);
 
-  useEffect(() => {
+useEffect(() => {
 
-    axios
-      .get(
-        "http://127.0.0.1:8000/wallet"
-      )
-      .then((response) => {
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
 
-        setBalance(
-          response.data.balance
-        );
+  axios
+    .get(
+      `http://127.0.0.1:8000/wallet/${userId}`
+    )
+    .then((response) => {
 
-      })
-      .catch((error) => {
+      setBalance(
+        response.data.balance
+      );
 
-        console.log(error);
+    })
+    .catch((error) => {
 
-      });
+      console.log(error);
 
-  }, []);
+    });
+
+}, []);
 
   return (
     <div className="balance-preview">

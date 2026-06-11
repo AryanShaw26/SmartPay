@@ -24,58 +24,64 @@ function Analytics() {
     useState(0);
 
   useEffect(() => {
-    axios
-      .get(
-        "http://127.0.0.1:8000/transactions"
-      )
-      .then((response) => {
 
-        const transactions =
-          response.data;
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
 
-        let sendMoney = 0;
+  axios
+    .get(
+      `http://127.0.0.1:8000/transactions/${userId}`
+    )
+    .then((response) => {
 
-        let addMoney = 0;
+      const transactions =
+        response.data;
 
-        transactions.forEach(
-          (transaction) => {
+      let sendMoney = 0;
+      let addMoney = 0;
 
-            if (
-              transaction.purpose ===
-              "Add Money"
-            ) {
-              addMoney += Number(
-                transaction.amount
-              );
-            } else {
-              sendMoney += Number(
-                transaction.amount
-              );
-            }
+      transactions.forEach(
+        (transaction) => {
 
+          if (
+            transaction.purpose ===
+            "Add Money"
+          ) {
+            addMoney += Number(
+              transaction.amount
+            );
+          } else {
+            sendMoney += Number(
+              transaction.amount
+            );
           }
-        );
 
-        setChartData([
-          {
-            name: "Add Money",
-            value: addMoney,
-          },
-          {
-            name: "Send Money",
-            value: sendMoney,
-          },
-        ]);
+        }
+      );
 
-        setTotal(
-          addMoney + sendMoney
-        );
+      setChartData([
+        {
+          name: "Add Money",
+          value: addMoney,
+        },
+        {
+          name: "Send Money",
+          value: sendMoney,
+        },
+      ]);
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+      setTotal(
+        addMoney + sendMoney
+      );
+
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}, []);
 
   return (
     <div className="analytics-card">

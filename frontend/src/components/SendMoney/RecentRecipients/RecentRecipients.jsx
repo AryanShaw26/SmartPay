@@ -9,9 +9,14 @@ function RecentRecipients() {
 
   useEffect(() => {
 
+    const userId =
+      localStorage.getItem(
+        "user_id"
+      );
+
     axios
       .get(
-        "http://127.0.0.1:8000/recent-recipients"
+        `http://127.0.0.1:8000/recent-recipients/${userId}`
       )
       .then((response) => {
 
@@ -22,7 +27,10 @@ function RecentRecipients() {
       })
       .catch((error) => {
 
-        console.log(error);
+        console.log(
+          "Error fetching recipients:",
+          error
+        );
 
       });
 
@@ -66,7 +74,12 @@ function RecentRecipients() {
                 </strong>
 
                 <p>
-                  ₹{recipient.amount}
+                  ₹
+                  {Number(
+                    recipient.amount
+                  ).toLocaleString(
+                    "en-IN"
+                  )}
                 </p>
 
               </div>

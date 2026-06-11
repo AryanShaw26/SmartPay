@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-
+from decimal import Decimal
 from database import SessionLocal, engine, Base
 from models import Transaction, Wallet
 from schemas import (
@@ -49,11 +49,16 @@ def home():
 
 
 # Get All Transactions
-@app.get("/transactions")
+@app.get("/transactions/{user_id}")
 def get_transactions(
+    user_id:int,
     db: Session = Depends(get_db)
 ):
-    transactions = db.query(Transaction).all()
+    transactions = (db.query(Transaction).filter(
+        Transaction.user_id==user_id
+    )
+    .all()
+    )
 
     return transactions
 
@@ -89,8 +94,17 @@ def create_transaction(
 
     wallet = (
         db.query(Wallet)
+        .filter(
+            Wallet.user_id == user.id
+        )
         .first()
     )
+
+    if not wallet:
+        raise HTTPException(
+            status_code=404,
+            detail="Wallet Not Found"
+        )
 
     if wallet.balance < transaction.amount:
         raise HTTPException(
@@ -98,17 +112,16 @@ def create_transaction(
             detail="Insufficient Balance"
         )
 
-    # Deduct balance
-    wallet.balance -= transaction.amount
+    wallet.balance -= Decimal(str(transaction.amount))
 
-    # Save transaction
     new_transaction = Transaction(
-        recipient=transaction.recipient,
-        amount=transaction.amount,
-        purpose=transaction.purpose,
-        notes=transaction.notes,
-        status="Success"
-    )
+    user_id=user.id,
+    recipient=transaction.recipient,
+    amount=transaction.amount,
+    purpose=transaction.purpose,
+    notes=transaction.notes,
+    status="Success"
+)
 
     db.add(new_transaction)
 
@@ -117,18 +130,25 @@ def create_transaction(
     db.refresh(new_transaction)
 
     return {
-        "message": "Money Sent Successfully",
-        "transaction": new_transaction,
-        "remaining_balance": wallet.balance
+        "message":
+        "Money Sent Successfully",
+        "transaction":
+        new_transaction,
+        "remaining_balance":
+        wallet.balance
     }
 
-@app.get("/wallet")
+@app.get("/wallet/{user_id}")
 def get_wallet(
+    user_id: int,
     db: Session = Depends(get_db)
 ):
 
     wallet = (
         db.query(Wallet)
+        .filter(
+            Wallet.user_id == user_id
+        )
         .first()
     )
 
@@ -143,7 +163,7 @@ def add_money(
     user = (
         db.query(User)
         .filter(
-            User.email == data.email
+            User.id == data.user_id
         )
         .first()
     )
@@ -162,12 +182,22 @@ def add_money(
 
     wallet = (
         db.query(Wallet)
+        .filter(
+            Wallet.user_id == user.id
+        )
         .first()
     )
 
-    wallet.balance += data.amount
+    if not wallet:
+        raise HTTPException(
+            status_code=404,
+            detail="Wallet Not Found"
+        )
+
+    wallet.balance += Decimal(str(data.amount))
 
     new_transaction = Transaction(
+        user_id=user.id,
         recipient="Wallet Topup",
         amount=data.amount,
         purpose="Add Money",
@@ -182,9 +212,13 @@ def add_money(
     db.refresh(wallet)
 
     return {
-        "message": "Money Added Successfully",
-        "balance": wallet.balance
+        "message":
+        "Money Added Successfully",
+        "balance":
+        wallet.balance
     }
+
+
 @app.get("/recent-topups")
 def recent_topups(
     db: Session = Depends(get_db)
@@ -212,7 +246,9 @@ def register_user(
 
     existing_user = (
         db.query(User)
-        .filter(User.email == user.email)
+        .filter(
+            User.email == user.email
+        )
         .first()
     )
 
@@ -234,6 +270,16 @@ def register_user(
     db.commit()
 
     db.refresh(new_user)
+
+    # Create wallet for this user
+    wallet = Wallet(
+        user_id=new_user.id,
+        balance=50000
+    )
+
+    db.add(wallet)
+
+    db.commit()
 
     return {
         "message":
@@ -271,14 +317,16 @@ def login_user(
     "email": existing_user.email
 }
 
-@app.get("/recent-recipients")
+@app.get("/recent-recipients/{user_id}")
 def recent_recipients(
+    user_id: int,
     db: Session = Depends(get_db)
 ):
 
     recipients = (
         db.query(Transaction)
         .filter(
+            Transaction.user_id == user_id,
             Transaction.purpose != "Add Money"
         )
         .order_by(
