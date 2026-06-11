@@ -6,7 +6,6 @@ import {
   FaPlusCircle,
   FaPaperPlane,
   FaHistory,
-  FaUsers,
   FaQrcode,
   FaChartPie,
   FaHeadset,
@@ -38,10 +37,6 @@ function Sidebar() {
           <Link to="/transactions-page" className="sidebar-item">
             <FaHistory></FaHistory>
             <span>Transaction</span>
-          </Link>
-          <Link to="/beneficiaries" className="sidebar-item">
-            <FaUsers></FaUsers>
-            <span>Beneficiaries</span>
           </Link>
           <Link to="/qr-payments" className="sidebar-item">
             <FaQrcode></FaQrcode>
