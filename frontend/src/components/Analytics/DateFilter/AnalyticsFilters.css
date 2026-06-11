@@ -1,0 +1,30 @@
+.analytics-filters {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: #111;
+  color: #ffd700;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  padding: 12px 24px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.filter-btn:hover {
+  border-color: #ffd700;
+}
+
+.filter-btn.active {
+  background: #ffd700;
+  color: black;
+  font-weight: 600;
+}

@@ -12,6 +12,21 @@ from schemas import (
 from models import User
 from schemas import UserRegister
 from schemas import UserLogin
+from schemas import (
+    UpdateProfileRequest,
+    ChangePasswordRequest
+)
+from fastapi.responses import FileResponse
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Table,
+    TableStyle,
+    Paragraph,
+    Spacer
+)
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+import tempfile
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
@@ -337,3 +352,164 @@ def recent_recipients(
     )
 
     return recipients
+
+@app.put("/update-profile")
+def update_profile(
+    data: UpdateProfileRequest,
+    db: Session = Depends(get_db)
+):
+
+    user = (
+        db.query(User)
+        .filter(User.id == data.user_id)
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+
+    if user.password != data.current_password:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect Password"
+        )
+
+    user.full_name = data.full_name
+    user.email = data.email
+
+    db.commit()
+
+    return {
+        "message": "Profile Updated Successfully"
+    }
+
+@app.put("/change-password")
+def change_password(
+    data: ChangePasswordRequest,
+    db: Session = Depends(get_db)
+):
+
+    user = (
+        db.query(User)
+        .filter(User.id == data.user_id)
+        .first()
+    )
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+
+    if user.password != data.current_password:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect Password"
+        )
+
+    user.password = data.new_password
+
+    db.commit()
+
+    return {
+        "message": "Password Updated Successfully"
+    }
+
+@app.get("/download-statement/{user_id}")
+def download_statement(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
+
+    transactions = (
+        db.query(Transaction)
+        .filter(
+            Transaction.user_id == user_id
+        )
+        .all()
+    )
+
+    temp_file = tempfile.NamedTemporaryFile(
+        delete=False,
+        suffix=".pdf"
+    )
+
+    pdf = SimpleDocTemplate(
+        temp_file.name
+    )
+
+    styles = getSampleStyleSheet()
+
+    content = []
+
+    content.append(
+        Paragraph(
+            "SmartPay Transaction Statement",
+            styles["Title"]
+        )
+    )
+
+    content.append(
+        Spacer(1, 20)
+    )
+
+    table_data = [
+        [
+            "Date",
+            "Recipient",
+            "Amount",
+            "Purpose",
+            "Status"
+        ]
+    ]
+
+    for transaction in transactions:
+
+        table_data.append([
+            transaction.date.strftime(
+                "%d-%m-%Y"
+            ),
+            transaction.recipient,
+            f"₹{transaction.amount}",
+            transaction.purpose,
+            transaction.status
+        ])
+
+    table = Table(table_data)
+
+    table.setStyle(
+        TableStyle([
+            (
+                "BACKGROUND",
+                (0,0),
+                (-1,0),
+                colors.black
+            ),
+            (
+                "TEXTCOLOR",
+                (0,0),
+                (-1,0),
+                colors.white
+            ),
+            (
+                "GRID",
+                (0,0),
+                (-1,-1),
+                1,
+                colors.black
+            )
+        ])
+    )
+
+    content.append(table)
+
+    pdf.build(content)
+
+    return FileResponse(
+        temp_file.name,
+        media_type="application/pdf",
+        filename="SmartPay_Statement.pdf"
+    )

@@ -14,7 +14,13 @@ import {
 } from "react-icons/fa";
 
 function Sidebar() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+
+    navigate("/login", { replace: true });
+  };
   return (
     <>
       <div className="sidebar-container">
@@ -55,7 +61,8 @@ function Sidebar() {
             <span>Settings</span>
           </Link>
         </div>
-        <div className="sidebar-logout" onClick={() => navigate("/login")}>
+        <div className="sidebar-logout"
+        onClick={handleLogout}>
           <FaSignOutAlt />
           <span>Logout</span>
         </div>

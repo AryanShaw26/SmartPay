@@ -4,13 +4,17 @@ import Sidebar from "./Sidebar/Sidebar";
 import Header from "./Header/Header";
 import BalanceCard from "./BalanceCard/BalanceCard";
 import RecentTransactions from "./RecentTransactions/RecentTransactions";
-import Analytics from "./Analytics/Analytics";
+
+import DashboardAnalytics from "./DashboardAnalytics/DashboardAnalytics";
+
 function Dashboard() {
   return (
     <div className="dashboard-layout">
+
       <Sidebar />
 
       <div className="dashboard-main">
+
         <Header />
 
         <div className="top-cards">
@@ -18,10 +22,15 @@ function Dashboard() {
         </div>
 
         <div className="bottom-cards">
+
           <RecentTransactions />
-          <Analytics />
+
+          <DashboardAnalytics />
+
         </div>
+
       </div>
+
     </div>
   );
 }

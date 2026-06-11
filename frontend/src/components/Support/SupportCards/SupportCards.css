@@ -1,5 +1,6 @@
 .support-cards {
-    display: grid;
+    display: flex;
+    justify-content: center;
 
     grid-template-columns: repeat(3, 1fr);
 
@@ -82,4 +83,27 @@
         grid-template-columns: 1fr;
     }
 
+}
+.email-support-btn {
+    display: inline-block;
+
+    background: #FFD700;
+
+    color: black;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    padding: 12px 20px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.email-support-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
 }

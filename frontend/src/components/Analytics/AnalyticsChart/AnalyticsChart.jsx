@@ -1,102 +1,34 @@
-import "./Analytics.css";
+import "./AnalyticsChart.css";
 
 import {
   PieChart,
   Pie,
   Cell,
-  ResponsiveContainer,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
-
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const COLORS = [
   "#FFD700",
   "#F59E0B",
 ];
 
-function Analytics() {
-  const [chartData, setChartData] =
-    useState([]);
-
-  const [total, setTotal] =
-    useState(0);
-
-  useEffect(() => {
-
-  const userId =
-    localStorage.getItem(
-      "user_id"
-    );
-
-  axios
-    .get(
-      `http://127.0.0.1:8000/transactions/${userId}`
-    )
-    .then((response) => {
-
-      const transactions =
-        response.data;
-
-      let sendMoney = 0;
-      let addMoney = 0;
-
-      transactions.forEach(
-        (transaction) => {
-
-          if (
-            transaction.purpose ===
-            "Add Money"
-          ) {
-            addMoney += Number(
-              transaction.amount
-            );
-          } else {
-            sendMoney += Number(
-              transaction.amount
-            );
-          }
-
-        }
-      );
-
-      setChartData([
-        {
-          name: "Add Money",
-          value: addMoney,
-        },
-        {
-          name: "Send Money",
-          value: sendMoney,
-        },
-      ]);
-
-      setTotal(
-        addMoney + sendMoney
-      );
-
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-}, []);
-
+function AnalyticsChart({
+  chartData,
+  total,
+}) {
   return (
-    <div className="analytics-card">
+    <div className="analytics-chart-card">
 
-      <div className="analytics-header">
-        <h3>
-          Transaction Overview
-        </h3>
-      </div>
+      <h2 className="chart-title">
+        Transaction Overview
+      </h2>
 
-      <div className="chart-wrapper">
+      <div className="chart-container">
 
         <ResponsiveContainer
           width="100%"
-          height={250}
+          height={320}
         >
           <PieChart>
 
@@ -104,8 +36,8 @@ function Analytics() {
               data={chartData}
               cx="50%"
               cy="50%"
-              innerRadius={60}
-              outerRadius={90}
+              innerRadius={80}
+              outerRadius={120}
               paddingAngle={4}
               dataKey="value"
             >
@@ -138,24 +70,24 @@ function Analytics() {
             )}
           </h2>
 
-          <p>Total</p>
+          <p>Total Volume</p>
 
         </div>
+
       </div>
 
-      <div className="category-list">
+      <div className="chart-legend">
 
         {chartData.map(
           (item, index) => (
             <div
-              className="category-item"
               key={index}
+              className="legend-item"
             >
-
-              <div className="category-left">
+              <div className="legend-left">
 
                 <span
-                  className="color-dot"
+                  className="legend-dot"
                   style={{
                     backgroundColor:
                       COLORS[
@@ -188,4 +120,4 @@ function Analytics() {
   );
 }
 
-export default Analytics;
+export default AnalyticsChart;

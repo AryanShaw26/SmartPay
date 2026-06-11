@@ -1,58 +1,123 @@
 import "./SecuritySettings.css";
 import { useState } from "react";
+import axios from "axios";
 
 function SecuritySettings() {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleUpdate = () => {
-    console.log({
-      currentPassword,
-      newPassword,
-      confirmPassword,
-    });
+  const [currentPassword,
+    setCurrentPassword] = useState("");
+
+  const [newPassword,
+    setNewPassword] = useState("");
+
+  const [confirmPassword,
+    setConfirmPassword] = useState("");
+
+  const handleUpdate =
+    async () => {
+
+    if (
+      newPassword !==
+      confirmPassword
+    ) {
+
+      alert(
+        "Passwords do not match"
+      );
+
+      return;
+    }
+
+    try {
+
+      const userId =
+        localStorage.getItem(
+          "user_id"
+        );
+
+      const response =
+        await axios.put(
+          "http://127.0.0.1:8000/change-password",
+          {
+            user_id: userId,
+            current_password:
+              currentPassword,
+            new_password:
+              newPassword
+          }
+        );
+
+      alert(
+        response.data.message
+      );
+
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+
+    } catch (error) {
+
+      alert(
+        error.response?.data?.detail ||
+        "Password Update Failed"
+      );
+
+    }
   };
 
   return (
     <div className="security-settings">
 
       <div className="security-header">
-        <h2>Security Settings</h2>
+        <h2>
+          Security Settings
+        </h2>
       </div>
 
       <div className="input-group">
-        <label>Current Password</label>
+        <label>
+          Current Password
+        </label>
+
         <input
           type="password"
-          placeholder="Enter Current Password"
           value={currentPassword}
-          onChange={(e) =>
-            setCurrentPassword(e.target.value)
+          onChange={(e)=>
+            setCurrentPassword(
+              e.target.value
+            )
           }
         />
       </div>
 
       <div className="input-group">
-        <label>New Password</label>
+        <label>
+          New Password
+        </label>
+
         <input
           type="password"
-          placeholder="Enter New Password"
           value={newPassword}
-          onChange={(e) =>
-            setNewPassword(e.target.value)
+          onChange={(e)=>
+            setNewPassword(
+              e.target.value
+            )
           }
         />
       </div>
 
       <div className="input-group">
-        <label>Confirm Password</label>
+        <label>
+          Confirm Password
+        </label>
+
         <input
           type="password"
-          placeholder="Confirm New Password"
           value={confirmPassword}
-          onChange={(e) =>
-            setConfirmPassword(e.target.value)
+          onChange={(e)=>
+            setConfirmPassword(
+              e.target.value
+            )
           }
         />
       </div>

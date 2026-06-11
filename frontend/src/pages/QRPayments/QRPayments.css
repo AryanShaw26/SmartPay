@@ -26,16 +26,11 @@
 
 /* Scanner + Generator */
 
-.qr-top-section {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 20px;
-
-    align-items: start;
+.qrpayments-content{
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
 }
-
 /* Tablet */
 
 @media (max-width: 1024px) {

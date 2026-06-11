@@ -42,3 +42,15 @@ class UserRegister(BaseModel):
 class UserLogin(BaseModel):
     email: str
     password: str
+
+class UpdateProfileRequest(BaseModel):
+    user_id: int
+    full_name: str
+    email: str
+    current_password: str
+
+
+class ChangePasswordRequest(BaseModel):
+    user_id: int
+    current_password: str
+    new_password: str

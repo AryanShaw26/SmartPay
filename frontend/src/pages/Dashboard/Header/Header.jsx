@@ -21,11 +21,15 @@ function Header() {
 
     const storedUser =
       localStorage.getItem(
-        "userName"
+        "full_name"
       );
 
     if (storedUser) {
-      setUserName(storedUser);
+
+      setUserName(
+        storedUser
+      );
+
     }
 
   }, []);

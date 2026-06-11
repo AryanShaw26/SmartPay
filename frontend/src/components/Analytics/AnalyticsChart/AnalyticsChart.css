@@ -1,0 +1,70 @@
+.analytics-chart-card {
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+}
+
+.chart-title {
+  text-align: center;
+  color: #ffd700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.chart-container {
+  position: relative;
+  height: 350px;
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:
+    translate(-50%, -50%);
+  text-align: center;
+}
+
+.chart-center h2 {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.chart-center p {
+  color: #aaaaaa;
+  margin-top: 5px;
+}
+
+.chart-legend {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.legend-item {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 14px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}

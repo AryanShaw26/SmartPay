@@ -3,15 +3,10 @@ import Header from "../Dashboard/Header/Header";
 
 import ProfileSettings from "../../components/Settings/ProfileSettings/ProfileSettings";
 import SecuritySettings from "../../components/Settings/SecuritySettings/SecuritySettings";
-import NotificationSettings from "../../components/Settings/NotificationSettings/NotificationSettings";
-import AppearanceSettings from "../../components/Settings/AppearanceSettings/AppearanceSettings";
 
 import "./Settings.css";
 
-import { useState } from "react";
 function Settings() {
-  const [emailNotifications,setEmailNotifications]=useState(true);
-  const [fullName,setFullName]=useState("");
   return (
     <div className="settings-layout">
 
@@ -26,10 +21,6 @@ function Settings() {
           <ProfileSettings />
 
           <SecuritySettings />
-
-          <NotificationSettings />
-
-          <AppearanceSettings />
 
         </div>
 

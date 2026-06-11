@@ -1,0 +1,58 @@
+.analytics-transactions {
+  margin-top: 30px;
+
+  background: #111;
+
+  border: 1px solid #2a2a2a;
+
+  border-radius: 20px;
+
+  padding: 25px;
+}
+
+.analytics-transactions h2 {
+  color: #ffd700;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+.analytics-transactions table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.analytics-transactions th {
+  background: #1a1a1a;
+
+  color: #ffd700;
+
+  padding: 15px;
+}
+
+.analytics-transactions td {
+  color: white;
+
+  text-align: center;
+
+  padding: 15px;
+
+  border-top: 1px solid #222;
+}
+
+.success {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.failed {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.empty-row {
+  padding: 25px;
+  color: #888;
+}
