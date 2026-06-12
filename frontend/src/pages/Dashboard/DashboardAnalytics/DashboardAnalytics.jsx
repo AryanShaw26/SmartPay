@@ -1,18 +1,15 @@
 import "./DashboardAnalytics.css";
+
 import {
   PieChart,
   Pie,
   Cell,
+  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const COLORS = [
-  "#FFD700",
-  "#F59E0B",
-];
 
 function DashboardAnalytics() {
   const [chartData, setChartData] =
@@ -36,7 +33,10 @@ function DashboardAnalytics() {
           response.data;
 
         let addMoney = 0;
+
         let sendMoney = 0;
+
+        let receivedMoney = 0;
 
         transactions.forEach(
           (transaction) => {
@@ -47,7 +47,18 @@ function DashboardAnalytics() {
               addMoney += Number(
                 transaction.amount
               );
-            } else {
+            }
+
+            else if (
+              transaction.purpose ===
+              "Received Money"
+            ) {
+              receivedMoney += Number(
+                transaction.amount
+              );
+            }
+
+            else {
               sendMoney += Number(
                 transaction.amount
               );
@@ -60,6 +71,12 @@ function DashboardAnalytics() {
             name: "Add Money",
             value: addMoney,
           },
+
+          {
+            name: "Received Money",
+            value: receivedMoney,
+          },
+
           {
             name: "Send Money",
             value: sendMoney,
@@ -67,7 +84,9 @@ function DashboardAnalytics() {
         ]);
 
         setTotal(
-          addMoney + sendMoney
+          addMoney +
+            receivedMoney +
+            sendMoney
         );
       })
       .catch((error) => {
@@ -75,100 +94,125 @@ function DashboardAnalytics() {
       });
   }, []);
 
-  return (
-    <div className="dashboard-analytics">
+  const COLORS = [
+    "#FFD700",
+    "#00D26A",
+    "#F59E0B",
+  ];
 
+  return (
+    <div className="dashboard-analytics-card">
       <h2>
         Transaction Overview
       </h2>
 
-      <div className="dashboard-chart">
-
-        <ResponsiveContainer
-          width="100%"
-          height={220}
-        >
-          <PieChart>
-
-            <Pie
-              data={chartData}
-              cx="50%"
-              cy="50%"
-              innerRadius={50}
-              outerRadius={80}
-              paddingAngle={4}
-              dataKey="value"
-            >
-              {chartData.map(
-                (entry, index) => (
-                  <Cell
-                    key={index}
-                    fill={
-                      COLORS[
-                        index %
-                          COLORS.length
-                      ]
-                    }
-                  />
-                )
-              )}
-            </Pie>
-
-          </PieChart>
-        </ResponsiveContainer>
-
-        <div className="chart-total">
-
-          <h3>
-            ₹
-            {total.toLocaleString(
-              "en-IN"
-            )}
-          </h3>
-
-          <span>Total</span>
-
+      {total === 0 ? (
+        <div className="empty-chart">
+          No Transactions Yet
         </div>
+      ) : (
+        <>
+          <ResponsiveContainer
+            width="100%"
+            height={250}
+          >
+            <PieChart>
+              <Pie
+                data={chartData.filter(
+                  (item) =>
+                    item.value > 0
+                )}
+                dataKey="value"
+                innerRadius={55}
+                outerRadius={85}
+                paddingAngle={3}
+              >
+                {chartData
+                  .filter(
+                    (item) =>
+                      item.value > 0
+                  )
+                  .map(
+                    (
+                      entry,
+                      index
+                    ) => (
+                      <Cell
+                        key={index}
+                        fill={
+                          COLORS[
+                            index %
+                              COLORS.length
+                          ]
+                        }
+                      />
+                    )
+                  )}
+              </Pie>
 
-      </div>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
 
-      <div className="dashboard-legend">
+          <div className="dashboard-total">
+            <h3>
+              ₹
+              {total.toLocaleString(
+                "en-IN"
+              )}
+            </h3>
 
-        {chartData.map(
-          (item, index) => (
-            <div
-              key={index}
-              className="legend-item"
-            >
-              <div className="legend-left">
+            <p>Total</p>
+          </div>
 
-                <span
-                  className="legend-dot"
-                  style={{
-                    background:
-                      COLORS[index],
-                  }}
-                ></span>
-
-                <span>
-                  {item.name}
-                </span>
-
-              </div>
+          <div className="dashboard-chart-legend">
+            <div className="legend-item">
+              <span className="dot add-money"></span>
 
               <span>
-                ₹
-                {item.value.toLocaleString(
-                  "en-IN"
-                )}
+                Add Money
               </span>
 
+              <strong>
+                ₹
+                {chartData[0]?.value.toLocaleString(
+                  "en-IN"
+                )}
+              </strong>
             </div>
-          )
-        )}
 
-      </div>
+            <div className="legend-item">
+              <span className="dot received-money"></span>
 
+              <span>
+                Received Money
+              </span>
+
+              <strong>
+                ₹
+                {chartData[1]?.value.toLocaleString(
+                  "en-IN"
+                )}
+              </strong>
+            </div>
+
+            <div className="legend-item">
+              <span className="dot send-money"></span>
+
+              <span>
+                Send Money
+              </span>
+
+              <strong>
+                ₹
+                {chartData[2]?.value.toLocaleString(
+                  "en-IN"
+                )}
+              </strong>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

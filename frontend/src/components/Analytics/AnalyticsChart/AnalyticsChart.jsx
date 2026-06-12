@@ -10,9 +10,9 @@ import {
 
 const COLORS = [
   "#FFD700",
+  "#00D26A",
   "#F59E0B",
 ];
-
 function AnalyticsChart({
   chartData,
   total,

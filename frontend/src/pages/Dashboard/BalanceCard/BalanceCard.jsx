@@ -14,52 +14,34 @@ function BalanceCard() {
   const [totalSent, setTotalSent] = useState(0);
 
   useEffect(() => {
-  const userId =
-    localStorage.getItem("user_id");
+    const userId = localStorage.getItem("user_id");
 
-  axios
-    .get(
-      `http://127.0.0.1:8000/wallet/${userId}`
-    )
-    .then((response) => {
-      setBalance(response.data.balance);
-    })
-    .catch((error) => {
-      console.log(
-        "Error fetching wallet:",
-        error
-      );
-    });
+    axios
+      .get(`http://127.0.0.1:8000/wallet/${userId}`)
+      .then((response) => {
+        setBalance(response.data.balance);
+      })
+      .catch((error) => {
+        console.log("Error fetching wallet:", error);
+      });
 
-  axios
-    .get(
-      `http://127.0.0.1:8000/transactions/${userId}`
-    )
-    .then((response) => {
-      const transactions =
-        response.data;
+    axios
+      .get(`http://127.0.0.1:8000/transactions/${userId}`)
+      .then((response) => {
+        const transactions = response.data;
 
-      setTransactionsCount(
-        transactions.length
-      );
+        setTransactionsCount(transactions.length);
 
-      const total =
-        transactions.reduce(
-          (sum, transaction) =>
-            sum +
-            Number(transaction.amount),
-          0
-        );
+        const totalSent = transactions
+          .filter((transaction) => transaction.purpose === "Send Money")
+          .reduce((sum, transaction) => sum + Number(transaction.amount), 0);
 
-      setTotalSent(total);
-    })
-    .catch((error) => {
-      console.log(
-        "Error fetching transactions:",
-        error
-      );
-    });
-}, []);
+        setTotalSent(total);
+      })
+      .catch((error) => {
+        console.log("Error fetching transactions:", error);
+      });
+  }, []);
 
   return (
     <div className="balance-card">

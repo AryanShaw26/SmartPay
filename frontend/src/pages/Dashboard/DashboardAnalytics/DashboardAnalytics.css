@@ -91,7 +91,17 @@
 
   border-radius: 50%;
 }
+.received-money {
+  background: #00d26a;
+}
 
+.add-money {
+  background: #65071e;
+}
+
+.send-money {
+  background: #f59e0b;
+}
 @media (max-width: 1024px) {
   .dashboard-analytics {
     width: 100%;

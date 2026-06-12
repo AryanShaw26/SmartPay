@@ -3,111 +3,213 @@ import { useState } from "react";
 import axios from "axios";
 
 function SendMoneyForm() {
-  const [recipient, setRecipient] = useState("");
 
-  const [amount, setAmount] = useState("");
+  const [recipientName, setRecipientName] =
+    useState("");
 
-  const [purpose, setPurpose] = useState("");
+  const [recipientEmail, setRecipientEmail] =
+    useState("");
 
-  const [notes, setNotes] = useState("");
+  const [amount, setAmount] =
+    useState("");
 
-  const [password, setPassword] = useState("");
+  const [purpose, setPurpose] =
+    useState("");
+
+  const [notes, setNotes] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
+
       const payload = {
-        recipient,
-        amount: Number(amount),
+
+        recipient_name:
+          recipientName,
+
+        recipient_email:
+          recipientEmail,
+
+        amount:
+          Number(amount),
+
         purpose,
+
         notes,
+
         password,
-        user_id: Number(localStorage.getItem("user_id")),
+
+        user_id: Number(
+          localStorage.getItem(
+            "user_id"
+          )
+        ),
+
       };
 
-      console.log("Sending Payload:", payload);
-      console.log("USER ID =", localStorage.getItem("user_id"));
-      const response = await axios.post(
-        "http://127.0.0.1:8000/transactions",
-        payload,
+      console.log(
+        "Sending Payload:",
+        payload
       );
 
-      alert(response.data.message);
+      const response =
+        await axios.post(
+          "http://127.0.0.1:8000/transactions",
+          payload
+        );
 
-      setRecipient("");
+      alert(
+        response.data.message
+      );
+
+      setRecipientName("");
+      setRecipientEmail("");
       setAmount("");
       setPurpose("");
       setNotes("");
       setPassword("");
+
     } catch (error) {
-      console.log("Backend Error:", error.response?.data);
+
+      console.log(
+        "Backend Error:",
+        error.response?.data
+      );
 
       alert(
         error.response?.data?.detail ||
-          error.response?.data?.message ||
-          "Transaction Failed",
+        error.response?.data?.message ||
+        "Transaction Failed"
       );
+
     }
+
   };
 
   return (
-    <div className="send-money-form">
-      <h2>Send Money</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label>Recipient</label>
+    <div className="send-money-form">
+
+      <h2>
+        Send Money
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+      >
+
+        <label>
+          Recipient Name
+        </label>
 
         <input
           type="text"
           placeholder="Enter Recipient Name"
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
+          value={recipientName}
+          onChange={(e) =>
+            setRecipientName(
+              e.target.value
+            )
+          }
           required
         />
 
-        <label>Amount</label>
+        <label>
+          Recipient Email
+        </label>
+
+        <input
+          type="email"
+          placeholder="Enter Recipient Email"
+          value={recipientEmail}
+          onChange={(e) =>
+            setRecipientEmail(
+              e.target.value
+            )
+          }
+          required
+        />
+
+        <label>
+          Amount
+        </label>
 
         <input
           type="number"
           placeholder="₹ Enter Amount"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) =>
+            setAmount(
+              e.target.value
+            )
+          }
           required
         />
 
-        <label>Purpose</label>
+        <label>
+          Purpose
+        </label>
 
         <input
           type="text"
           placeholder="Enter Purpose"
           value={purpose}
-          onChange={(e) => setPurpose(e.target.value)}
+          onChange={(e) =>
+            setPurpose(
+              e.target.value
+            )
+          }
           required
         />
 
-        <label>Notes</label>
+        <label>
+          Notes
+        </label>
 
         <textarea
           placeholder="Optional Message"
           value={notes}
-          onChange={(e) => setNotes(e.target.value)}
+          onChange={(e) =>
+            setNotes(
+              e.target.value
+            )
+          }
         />
 
-        <label>Transaction Password</label>
+        <label>
+          Transaction Password
+        </label>
 
         <input
           type="password"
           placeholder="Enter Login Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(
+              e.target.value
+            )
+          }
           required
         />
 
-        <button type="submit">Send Money</button>
+        <button
+          type="submit"
+        >
+          Send Money
+        </button>
+
       </form>
+
     </div>
+
   );
+
 }
 
 export default SendMoneyForm;

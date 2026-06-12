@@ -3,7 +3,8 @@ from datetime import datetime
 from decimal import Decimal
 
 class TransactionCreate(BaseModel):
-    recipient: str
+    recipient_name: str
+    recipient_email:str
     amount: Decimal
     purpose: str
     notes: str

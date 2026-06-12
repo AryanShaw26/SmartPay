@@ -53,7 +53,29 @@ def get_db():
 
     finally:
         db.close()
+@app.get("/wallet/{user_id}")
+def get_wallet_balance(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
 
+    wallet = (
+        db.query(Wallet)
+        .filter(
+            Wallet.user_id == user_id
+        )
+        .first()
+    )
+
+    if not wallet:
+        raise HTTPException(
+            status_code=404,
+            detail="Wallet Not Found"
+        )
+
+    return {
+        "balance": float(wallet.balance)
+    }
 
 # Home Route
 @app.get("/")
@@ -66,13 +88,19 @@ def home():
 # Get All Transactions
 @app.get("/transactions/{user_id}")
 def get_transactions(
-    user_id:int,
+    user_id: int,
     db: Session = Depends(get_db)
 ):
-    transactions = (db.query(Transaction).filter(
-        Transaction.user_id==user_id
-    )
-    .all()
+
+    transactions = (
+        db.query(Transaction)
+        .filter(
+            Transaction.user_id == user_id
+        )
+        .order_by(
+            Transaction.date.desc()
+        )
+        .all()
     )
 
     return transactions
@@ -87,7 +115,7 @@ def create_transaction(
     db: Session = Depends(get_db)
 ):
 
-    user = (
+    sender = (
         db.query(User)
         .filter(
             User.id == transaction.user_id
@@ -95,79 +123,128 @@ def create_transaction(
         .first()
     )
 
-    if not user:
+    if not sender:
         raise HTTPException(
             status_code=404,
-            detail="User Not Found"
+            detail="Sender Not Found"
         )
 
-    if user.password != transaction.password:
+    if sender.password != transaction.password:
         raise HTTPException(
             status_code=401,
             detail="Incorrect Password"
         )
 
-    wallet = (
-        db.query(Wallet)
+    recipient_user = (
+        db.query(User)
         .filter(
-            Wallet.user_id == user.id
+            User.email ==
+            transaction.recipient_email
         )
         .first()
     )
 
-    if not wallet:
+    if not recipient_user:
         raise HTTPException(
             status_code=404,
-            detail="Wallet Not Found"
+            detail="Recipient Not Found"
         )
 
-    if wallet.balance < transaction.amount:
+    if recipient_user.id == sender.id:
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot Transfer To Yourself"
+        )
+
+    sender_wallet = (
+        db.query(Wallet)
+        .filter(
+            Wallet.user_id == sender.id
+        )
+        .first()
+    )
+
+    if not sender_wallet:
+        raise HTTPException(
+            status_code=404,
+            detail="Sender Wallet Not Found"
+        )
+
+    recipient_wallet = (
+        db.query(Wallet)
+        .filter(
+            Wallet.user_id ==
+            recipient_user.id
+        )
+        .first()
+    )
+
+    if not recipient_wallet:
+        raise HTTPException(
+            status_code=404,
+            detail="Recipient Wallet Not Found"
+        )
+
+    transfer_amount = Decimal(
+        str(transaction.amount)
+    )
+
+    if sender_wallet.balance < transfer_amount:
         raise HTTPException(
             status_code=400,
             detail="Insufficient Balance"
         )
 
-    wallet.balance -= Decimal(str(transaction.amount))
+    sender_wallet.balance -= transfer_amount
 
-    new_transaction = Transaction(
-    user_id=user.id,
-    recipient=transaction.recipient,
-    amount=transaction.amount,
-    purpose=transaction.purpose,
-    notes=transaction.notes,
-    status="Success"
-)
+    recipient_wallet.balance += transfer_amount
 
-    db.add(new_transaction)
+    sender_transaction = Transaction(
+        user_id=sender.id,
+        recipient=recipient_user.full_name,
+        amount=transaction.amount,
+        purpose="Send Money",
+        notes=transaction.notes,
+        status="Success"
+    )
+
+    recipient_transaction = Transaction(
+        user_id=recipient_user.id,
+        recipient=f"Received From {sender.full_name}",
+        amount=transaction.amount,
+        purpose="Received Money",
+        notes=transaction.notes,
+        status="Success"
+    )
+
+    db.add(sender_transaction)
+
+    db.add(recipient_transaction)
 
     db.commit()
 
-    db.refresh(new_transaction)
+    db.refresh(sender_transaction)
 
     return {
         "message":
         "Money Sent Successfully",
         "transaction":
-        new_transaction,
+        {
+            "recipient":
+            recipient_user.full_name,
+
+            "recipient_email":
+            recipient_user.email,
+
+            "amount":
+            transaction.amount,
+
+            "status":
+            "Success"
+        },
         "remaining_balance":
-        wallet.balance
+        float(sender_wallet.balance)
     }
-
-@app.get("/wallet/{user_id}")
-def get_wallet(
-    user_id: int,
-    db: Session = Depends(get_db)
-):
-
-    wallet = (
-        db.query(Wallet)
-        .filter(
-            Wallet.user_id == user_id
-        )
-        .first()
-    )
-
-    return wallet
 
 @app.post("/add-money")
 def add_money(

@@ -13,12 +13,14 @@ function AnalyticsTransactions({
       <table>
 
         <thead>
+
           <tr>
             <th>Date</th>
             <th>Recipient</th>
             <th>Amount</th>
             <th>Status</th>
           </tr>
+
         </thead>
 
         <tbody>
@@ -38,16 +40,30 @@ function AnalyticsTransactions({
 
             transactions
               .slice()
-              .reverse()
+              .sort(
+                (a, b) =>
+                  new Date(b.date) -
+                  new Date(a.date)
+              )
               .slice(0, 10)
               .map((transaction) => {
 
-                console.log(transaction);
+                let displayRecipient =
+                  transaction.recipient;
+
+                if (
+                  transaction.purpose ===
+                  "Send Money"
+                ) {
+                  displayRecipient =
+                    `Sent To ${transaction.recipient}`;
+                }
 
                 return (
                   <tr
                     key={transaction.id}
                   >
+
                     <td>
                       {new Date(
                         transaction.date
@@ -57,7 +73,9 @@ function AnalyticsTransactions({
                     </td>
 
                     <td>
-                      {transaction.recipient}
+                      {
+                        displayRecipient
+                      }
                     </td>
 
                     <td>
@@ -77,8 +95,11 @@ function AnalyticsTransactions({
                           : "failed"
                       }
                     >
-                      {transaction.status}
+                      {
+                        transaction.status
+                      }
                     </td>
+
                   </tr>
                 );
               })

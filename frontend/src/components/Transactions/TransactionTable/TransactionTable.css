@@ -1,67 +1,113 @@
-.table-container{
-    width:100%
-    
-}
-.table-container h1{
-    color:#ffd700;
-    text-align: center;
-    margin-top:20px;
-}
-.transaction-details{
-    background: #111;
-
-    border: 1px solid rgba(255, 215, 0, 0.15);
-
-    border-radius: 20px;
-
-    padding: 25px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 20px;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-
-    transition: 0.3s;
-    color: #ffd700;
-    justify-content: space-evenly;
-}
-.transaction-row{
-    display:flex;
-
-    justify-content:space-evenly;
-
-    align-items:center;
-
-    padding:20px;
-
-    background:#1a1a1a;
-
-    color:white;
-
-    border-radius:12px;
-
-    margin-top:10px;
-}
-.success{
-    color:#00d26a;
+.table-container {
+  width: 100%;
 }
 
-.pending{
-    color:#FFD700;
+.table-container h1 {
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.5rem;
 }
 
-.failed{
-    color:#ff4d4d;
+.transaction-table {
+  width: 100%;
 }
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr 1.5fr;
+
+  background: #111;
+
+  padding: 25px;
+
+  border-radius: 20px;
+
+  color: #a0b3d1;
+
+  font-weight: 600;
+
+  margin-bottom: 12px;
+
+  border: 1px solid rgba(255, 215, 0, 0.15);
+
+  text-align: center;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr 1.5fr;
+
+  align-items: center;
+
+  background: #1a1a1a;
+
+  color: white;
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  margin-bottom: 12px;
+
+  transition: 0.3s;
+
+  text-align: center;
+}
+
+.table-row:hover {
+  transform: translateY(-2px);
+
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.success {
+  color: #00d26a;
+  font-weight: 700;
+}
+
+.pending {
+  color: #ffd700;
+  font-weight: 700;
+}
+
+.failed {
+  color: #ff4d4d;
+  font-weight: 700;
+}
+
 .credit {
   color: #00d26a;
   font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .debit {
   color: #ff4d4d;
   font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: repeat(5, 1fr);
+
+    font-size: 14px;
+
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-header,
+  .table-row {
+    font-size: 12px;
+
+    padding: 12px;
+  }
+
+  .table-container h1 {
+    font-size: 2rem;
+  }
 }

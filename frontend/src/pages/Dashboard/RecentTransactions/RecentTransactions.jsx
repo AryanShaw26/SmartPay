@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function TransactionItem({ name, date, amount, purpose }) {
-  const isTopup = purpose === "Add Money";
+  const isCredit = purpose === "Add Money"|| 
+  purpose==="Received Money";
 
   return (
     <div className="transaction-item">
@@ -27,8 +28,8 @@ function TransactionItem({ name, date, amount, purpose }) {
         </div>
       </div>
 
-      <div className={`transaction-amount ${isTopup ? "credit" : "debit"}`}>
-        {isTopup ? "+" : "-"}₹{amount}
+      <div className={`transaction-amount ${isCredit ? "credit" : "debit"}`}>
+        {isCredit ? "+" : "-"}₹{amount}
       </div>
     </div>
   );
