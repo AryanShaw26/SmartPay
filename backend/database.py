@@ -3,12 +3,13 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 
 DATABASE_URL = (
-    "postgresql://postgres:2609"
-    "@localhost:5432/smartpay_db"
+   "postgresql://neondb_owner:npg_w8ksPx6GYCZN@ep-lively-flower-aohgulzq.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 )
 
-engine = create_engine(DATABASE_URL)
-
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True
+)
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
