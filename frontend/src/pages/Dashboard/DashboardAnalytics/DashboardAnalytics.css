@@ -1,109 +1,105 @@
-.dashboard-analytics {
+.dashboard-analytics-card {
   background: #0d0d0d;
-
   border: 1px solid #2a2a2a;
-
   border-radius: 20px;
-
   padding: 20px;
-
   position: relative;
+  min-height: 520px;
 }
 
-.dashboard-analytics h2 {
+.dashboard-analytics-card h2 {
   color: #ffd700;
-
   text-align: center;
-
   margin-bottom: 20px;
-
-  font-size: 1.6rem;
-}
-
-.dashboard-chart {
-  position: relative;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-}
-
-.chart-total {
-  position: absolute;
-
-  text-align: center;
-}
-
-.chart-total h3 {
-  color: white;
-
   font-size: 1.8rem;
+}
 
+.recharts-responsive-container {
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-total {
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.dashboard-total h3 {
+  color: white;
+  font-size: 2rem;
   margin: 0;
+  font-weight: 700;
 }
 
-.chart-total span {
-  color: #b0b0b0;
-
-  font-size: 0.95rem;
+.dashboard-total p {
+  color: #a0a0a0;
+  margin-top: 5px;
+  font-size: 1rem;
 }
 
-.dashboard-legend {
-  margin-top: 15px;
-
+.dashboard-chart-legend {
+  margin-top: 10px;
   display: flex;
-
   flex-direction: column;
-
   gap: 12px;
 }
 
 .legend-item {
   background: #171717;
-
-  padding: 12px 15px;
-
+  padding: 14px 16px;
   border-radius: 12px;
 
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 
   color: white;
 }
 
-.legend-left {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
+.legend-item span {
+  color: white;
 }
 
-.legend-dot {
+.legend-item strong {
+  color: white;
+}
+
+.dot {
   width: 12px;
-
   height: 12px;
-
   border-radius: 50%;
-}
-.received-money {
-  background: #00d26a;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .add-money {
-  background: #65071e;
+  background: #ffd700;
+}
+
+.received-money {
+  background: #00d26a;
 }
 
 .send-money {
   background: #f59e0b;
 }
-@media (max-width: 1024px) {
-  .dashboard-analytics {
-    width: 100%;
+
+.empty-chart {
+  color: #888;
+  text-align: center;
+  padding: 50px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-total {
+    top: 205px;
+  }
+
+  .dashboard-total h3 {
+    font-size: 1.6rem;
   }
 }
