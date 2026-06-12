@@ -40,9 +40,9 @@ app.add_middleware(
         "http://127.0.0.1:5173",
 
         # future frontend deployment
-        "https://smart-pay-ten.vercel.app",
+        "https://smart-ad21ctzhk-aryan-shaw-s-projects.vercel.app",
     ],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
