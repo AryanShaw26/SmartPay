@@ -4,20 +4,15 @@ import QRCode from "react-qr-code";
 import axios from "axios";
 
 function QRGenerator() {
-  const [receiver, setReceiver] =
-    useState("");
+  const [receiver, setReceiver] = useState("");
 
-  const [amount, setAmount] =
-    useState("");
+  const [amount, setAmount] = useState("");
 
-  const [note, setNote] =
-    useState("");
+  const [note, setNote] = useState("");
 
-  const [password, setPassword] =
-    useState("");
+  const [password, setPassword] = useState("");
 
-  const [qrGenerated, setQrGenerated] =
-    useState(false);
+  const [qrGenerated, setQrGenerated] = useState(false);
 
   const qrData = JSON.stringify({
     receiver,
@@ -27,23 +22,19 @@ function QRGenerator() {
 
   const handlePayment = async () => {
     try {
-      const userId =
-        localStorage.getItem(
-          "user_id"
-        );
+      const userId = localStorage.getItem("user_id");
 
-      const response =
-        await axios.post(
-          "http://127.0.0.1:8000/transactions",
-          {
-            user_id: Number(userId),
-            recipient: receiver,
-            amount: Number(amount),
-            purpose: "QR Payment",
-            notes: note,
-            password,
-          }
-        );
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/transactions`,
+        {
+          user_id: Number(userId),
+          recipient: receiver,
+          amount: Number(amount),
+          purpose: "QR Payment",
+          notes: note,
+          password,
+        },
+      );
 
       alert(response.data.message);
 
@@ -51,11 +42,7 @@ function QRGenerator() {
     } catch (error) {
       console.log(error);
 
-      alert(
-        error.response?.data
-          ?.detail ||
-          "Payment Failed"
-      );
+      alert(error.response?.data?.detail || "Payment Failed");
     }
   };
 
@@ -66,19 +53,13 @@ function QRGenerator() {
       </div>
 
       <div className="input-group">
-        <label>
-          Recipient Name
-        </label>
+        <label>Recipient Name</label>
 
         <input
           type="text"
           placeholder="Rahul"
           value={receiver}
-          onChange={(e) =>
-            setReceiver(
-              e.target.value
-            )
-          }
+          onChange={(e) => setReceiver(e.target.value)}
         />
       </div>
 
@@ -89,11 +70,7 @@ function QRGenerator() {
           type="number"
           placeholder="500"
           value={amount}
-          onChange={(e) =>
-            setAmount(
-              e.target.value
-            )
-          }
+          onChange={(e) => setAmount(e.target.value)}
         />
       </div>
 
@@ -104,37 +81,22 @@ function QRGenerator() {
           type="text"
           placeholder="Lunch"
           value={note}
-          onChange={(e) =>
-            setNote(
-              e.target.value
-            )
-          }
+          onChange={(e) => setNote(e.target.value)}
         />
       </div>
 
       <div className="input-group">
-        <label>
-          Transaction Password
-        </label>
+        <label>Transaction Password</label>
 
         <input
           type="password"
           placeholder="Enter Password"
           value={password}
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
-      <button
-        className="generate-btn"
-        onClick={() =>
-          setQrGenerated(true)
-        }
-      >
+      <button className="generate-btn" onClick={() => setQrGenerated(true)}>
         Generate QR
       </button>
 
@@ -143,28 +105,18 @@ function QRGenerator() {
           style={{
             background: "white",
             padding: "20px",
-            borderRadius:
-              "12px",
+            borderRadius: "12px",
             marginTop: "20px",
             display: "flex",
-            justifyContent:
-              "center",
+            justifyContent: "center",
           }}
         >
-          <QRCode
-            value={qrData}
-            size={220}
-          />
+          <QRCode value={qrData} size={220} />
         </div>
       )}
 
       {qrGenerated && (
-        <button
-          className="generate-btn"
-          onClick={
-            handlePayment
-          }
-        >
+        <button className="generate-btn" onClick={handlePayment}>
           Pay Now
         </button>
       )}

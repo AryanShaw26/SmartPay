@@ -17,7 +17,7 @@ function BalanceCard() {
     const userId = localStorage.getItem("user_id");
 
     axios
-      .get(`http://127.0.0.1:8000/wallet/${userId}`)
+      .get(`${import.meta.env.VITE_API_URL}/wallet/${userId}`)
       .then((response) => {
         setBalance(response.data.balance);
       })
@@ -26,7 +26,7 @@ function BalanceCard() {
       });
 
     axios
-      .get(`http://127.0.0.1:8000/transactions/${userId}`)
+      .get(`${import.meta.env.VITE_API_URL}/transactions/${userId}`)
       .then((response) => {
         const transactions = response.data;
 

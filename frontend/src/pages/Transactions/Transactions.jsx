@@ -7,55 +7,34 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Transactions() {
-  const [transactions, setTransactions] =
-    useState([]);
+  const [transactions, setTransactions] = useState([]);
 
-  const [searchTerm, setSearchTerm] =
-    useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const userId =
-      localStorage.getItem("user_id");
+    const userId = localStorage.getItem("user_id");
 
     axios
-      .get(
-        `http://127.0.0.1:8000/transactions/${userId}`
-      )
+      .get(`${import.meta.env.VITE_API_URL}/transactions/${userId}`)
       .then((response) => {
-        setTransactions(
-          response.data
-        );
+        setTransactions(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const filteredTransactions =
-    transactions.filter(
-      (transaction) => {
-        const recipientMatch =
-          transaction.recipient
-            .toLowerCase()
-            .includes(
-              searchTerm.toLowerCase()
-            );
+  const filteredTransactions = transactions.filter((transaction) => {
+    const recipientMatch = transaction.recipient
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
-        const dateMatch =
-          new Date(
-            transaction.date
-          )
-            .toLocaleDateString(
-              "en-IN"
-            )
-            .includes(searchTerm);
+    const dateMatch = new Date(transaction.date)
+      .toLocaleDateString("en-IN")
+      .includes(searchTerm);
 
-        return (
-          recipientMatch ||
-          dateMatch
-        );
-      }
-    );
+    return recipientMatch || dateMatch;
+  });
 
   return (
     <div className="transactions-layout">
@@ -69,19 +48,11 @@ function Transactions() {
             type="text"
             placeholder="Search by recipient or date..."
             value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(
-                e.target.value
-              )
-            }
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
 
-        <TransactionTable
-          transactions={
-            filteredTransactions
-          }
-        />
+        <TransactionTable transactions={filteredTransactions} />
       </div>
     </div>
   );

@@ -7,34 +7,31 @@ function AddMoneyForm() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const userId = localStorage.getItem("user_id");
+    try {
+      const userId = localStorage.getItem("user_id");
 
-    console.log("USER ID =", userId);
+      console.log("USER ID =", userId);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/add-money",
-      {
-        user_id: Number(userId),
-        amount: Number(amount),
-        password,
-      }
-    );
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/add-money`,
+        {
+          user_id: Number(userId),
+          amount: Number(amount),
+          password,
+        },
+      );
 
-    alert(response.data.message);
+      alert(response.data.message);
 
-    window.location.reload();
-  } catch (error) {
-    console.log(error.response?.data);
+      window.location.reload();
+    } catch (error) {
+      console.log(error.response?.data);
 
-    alert(
-      error.response?.data?.detail ||
-      "Unable to add money"
-    );
-  }
-};
+      alert(error.response?.data?.detail || "Unable to add money");
+    }
+  };
 
   return (
     <div className="add-money-form-container">

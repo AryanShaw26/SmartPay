@@ -31,7 +31,7 @@ function Analytics() {
       const userId = localStorage.getItem("user_id");
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/download-statement/${userId}`,
+        `${import.meta.env.VITE_API_URL}/download-statement/${userId}`,
         {
           responseType: "blob",
         },
@@ -61,7 +61,7 @@ function Analytics() {
     const userId = localStorage.getItem("user_id");
 
     axios
-      .get(`http://127.0.0.1:8000/transactions/${userId}`)
+      .get(`${import.meta.env.VITE_API_URL}/transactions/${userId}`)
       .then((response) => {
         const transactions = response.data;
 

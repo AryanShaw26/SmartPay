@@ -4,65 +4,42 @@ import { useState } from "react";
 import axios from "axios";
 
 function ProfileSettings() {
-
   const [fullName, setFullName] = useState(
-    localStorage.getItem("full_name") || ""
+    localStorage.getItem("full_name") || "",
   );
 
-  const [email, setEmail] = useState(
-    localStorage.getItem("email") || ""
-  );
+  const [email, setEmail] = useState(localStorage.getItem("email") || "");
 
-
-  const [currentPassword, setCurrentPassword] =
-    useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
 
   const handleSave = async () => {
-
     try {
+      const userId = localStorage.getItem("user_id");
 
-      const userId =
-        localStorage.getItem("user_id");
-
-      const response =
-        await axios.put(
-          "http://127.0.0.1:8000/update-profile",
-          {
-            user_id: userId,
-            full_name: fullName,
-            email: email,
-            current_password:
-              currentPassword
-          }
-        );
-
-      localStorage.setItem(
-        "full_name",
-        fullName
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/update-profile`,
+        {
+          user_id: userId,
+          full_name: fullName,
+          email: email,
+          current_password: currentPassword,
+        },
       );
 
-      localStorage.setItem(
-        "email",
-        email
-      );
+      localStorage.setItem("full_name", fullName);
+
+      localStorage.setItem("email", email);
 
       alert(response.data.message);
 
       window.location.reload();
-
     } catch (error) {
-
-      alert(
-        error.response?.data?.detail ||
-        "Update Failed"
-      );
-
+      alert(error.response?.data?.detail || "Update Failed");
     }
   };
 
   return (
     <div className="profile-settings">
-
       <div className="profile-header">
         <h2>Profile Settings</h2>
       </div>
@@ -77,11 +54,7 @@ function ProfileSettings() {
         <input
           type="text"
           value={fullName}
-          onChange={(e)=>
-            setFullName(
-              e.target.value
-            )
-          }
+          onChange={(e) => setFullName(e.target.value)}
         />
       </div>
 
@@ -91,38 +64,24 @@ function ProfileSettings() {
         <input
           type="email"
           value={email}
-          onChange={(e)=>
-            setEmail(
-              e.target.value
-            )
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div className="input-group">
-        <label>
-          Current Password
-        </label>
+        <label>Current Password</label>
 
         <input
           type="password"
           placeholder="Verification Required"
           value={currentPassword}
-          onChange={(e)=>
-            setCurrentPassword(
-              e.target.value
-            )
-          }
+          onChange={(e) => setCurrentPassword(e.target.value)}
         />
       </div>
 
-      <button
-        className="save-btn"
-        onClick={handleSave}
-      >
+      <button className="save-btn" onClick={handleSave}>
         Save Changes
       </button>
-
     </div>
   );
 }

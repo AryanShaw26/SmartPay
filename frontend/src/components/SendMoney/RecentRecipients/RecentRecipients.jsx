@@ -3,52 +3,29 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function RecentRecipients() {
-
-  const [recipients, setRecipients] =
-    useState([]);
+  const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
-
-    const userId =
-      localStorage.getItem(
-        "user_id"
-      );
+    const userId = localStorage.getItem("user_id");
 
     axios
-      .get(
-        `http://127.0.0.1:8000/recent-recipients/${userId}`
-      )
+      .get(`${import.meta.env.VITE_API_URL}/recent-recipients/${userId}`)
       .then((response) => {
-
-        setRecipients(
-          response.data
-        );
-
+        setRecipients(response.data);
       })
       .catch((error) => {
-
-        console.log(
-          "Error fetching recipients:",
-          error
-        );
-
+        console.log("Error fetching recipients:", error);
       });
-
   }, []);
 
   return (
     <div className="recent-recipients">
-
       <div className="recipients-header">
-        <h2>
-          Recent Recipients
-        </h2>
+        <h2>Recent Recipients</h2>
       </div>
 
       <div className="recipients-list">
-
         {recipients.length === 0 ? (
-
           <p
             style={{
               color: "#888",
@@ -57,41 +34,18 @@ function RecentRecipients() {
           >
             No Recipients Found
           </p>
-
         ) : (
-
           recipients.map((recipient) => (
-
-            <div
-              key={recipient.id}
-              className="recipient-item"
-            >
-
+            <div key={recipient.id} className="recipient-item">
               <div>
+                <strong>{recipient.recipient}</strong>
 
-                <strong>
-                  {recipient.recipient}
-                </strong>
-
-                <p>
-                  ₹
-                  {Number(
-                    recipient.amount
-                  ).toLocaleString(
-                    "en-IN"
-                  )}
-                </p>
-
+                <p>₹{Number(recipient.amount).toLocaleString("en-IN")}</p>
               </div>
-
             </div>
-
           ))
-
         )}
-
       </div>
-
     </div>
   );
 }

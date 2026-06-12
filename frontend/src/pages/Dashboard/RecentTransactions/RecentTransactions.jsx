@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function TransactionItem({ name, date, amount, purpose }) {
-  const isCredit = purpose === "Add Money"|| 
-  purpose==="Received Money";
+  const isCredit = purpose === "Add Money" || purpose === "Received Money";
 
   return (
     <div className="transaction-item">
@@ -42,7 +41,7 @@ function RecentTransactions() {
     const userId = localStorage.getItem("user_id");
 
     axios
-      .get(`http://127.0.0.1:8000/transactions/${userId}`)
+      .get(`${import.meta.env.VITE_API_URL}/transactions/${userId}`)
       .then((response) => {
         const recentTransactions = response.data
           .sort((a, b) => new Date(b.date) - new Date(a.date))
