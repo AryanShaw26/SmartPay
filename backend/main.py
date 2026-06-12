@@ -42,7 +42,7 @@ app.add_middleware(
         # future frontend deployment
         "https://smart-pay-ten.vercel.app",
     ],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
