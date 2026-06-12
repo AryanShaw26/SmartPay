@@ -1,109 +1,120 @@
 .dashboard-analytics {
   background: #0d0d0d;
-
+ 
   border: 1px solid #2a2a2a;
-
+ 
   border-radius: 20px;
-
+ 
   padding: 20px;
-
+ 
   position: relative;
 }
-
+ 
 .dashboard-analytics h2 {
   color: #ffd700;
-
+ 
   text-align: center;
-
+ 
   margin-bottom: 20px;
-
+ 
   font-size: 1.6rem;
 }
-
+ 
 .dashboard-chart {
   position: relative;
-
+ 
   display: flex;
-
+ 
   justify-content: center;
-
+ 
   align-items: center;
 }
-
+ 
 .chart-total {
   position: absolute;
-
+ 
+  top: 50%;
+ 
+  left: 50%;
+ 
+  transform: translate(-50%, -50%);
+ 
   text-align: center;
+ 
+  pointer-events: none;
 }
-
+ 
 .chart-total h3 {
   color: white;
-
+ 
   font-size: 1.8rem;
-
+ 
   margin: 0;
 }
-
+ 
 .chart-total span {
   color: #b0b0b0;
-
+ 
   font-size: 0.95rem;
 }
-
+ 
 .dashboard-legend {
   margin-top: 15px;
-
+ 
   display: flex;
-
+ 
   flex-direction: column;
-
+ 
   gap: 12px;
 }
-
+ 
 .legend-item {
   background: #171717;
-
+ 
   padding: 12px 15px;
-
+ 
   border-radius: 12px;
-
+ 
   display: flex;
-
+ 
   justify-content: space-between;
-
+ 
   align-items: center;
-
+ 
   color: white;
 }
-
+ 
 .legend-left {
   display: flex;
-
+ 
   align-items: center;
-
+ 
   gap: 10px;
 }
-
+ 
 .legend-dot {
   width: 12px;
-
+ 
   height: 12px;
-
+ 
   border-radius: 50%;
+ 
+  flex-shrink: 0;
 }
-.received-money {
-  background: #00d26a;
+ 
+.empty-chart {
+  color: #b0b0b0;
+ 
+  text-align: center;
+ 
+  padding: 60px 0;
+ 
+  font-size: 0.95rem;
 }
-
-.add-money {
-  background: #65071e;
-}
-
-.send-money {
-  background: #f59e0b;
-}
+ 
 @media (max-width: 1024px) {
   .dashboard-analytics {
     width: 100%;
   }
 }
+ 

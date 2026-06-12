@@ -100,8 +100,12 @@ function DashboardAnalytics() {
     "#F59E0B",
   ];
 
+  const visibleData = chartData.filter(
+    (item) => item.value > 0
+  );
+
   return (
-    <div className="dashboard-analytics-card">
+    <div className="dashboard-analytics">
       <h2>
         Transaction Overview
       </h2>
@@ -112,31 +116,21 @@ function DashboardAnalytics() {
         </div>
       ) : (
         <>
-          <ResponsiveContainer
-            width="100%"
-            height={250}
-          >
-            <PieChart>
-              <Pie
-                data={chartData.filter(
-                  (item) =>
-                    item.value > 0
-                )}
-                dataKey="value"
-                innerRadius={55}
-                outerRadius={85}
-                paddingAngle={3}
-              >
-                {chartData
-                  .filter(
-                    (item) =>
-                      item.value > 0
-                  )
-                  .map(
-                    (
-                      entry,
-                      index
-                    ) => (
+          <div className="dashboard-chart">
+            <ResponsiveContainer
+              width="100%"
+              height={250}
+            >
+              <PieChart>
+                <Pie
+                  data={visibleData}
+                  dataKey="value"
+                  innerRadius={55}
+                  outerRadius={85}
+                  paddingAngle={3}
+                >
+                  {chartData.map(
+                    (entry, index) => (
                       <Cell
                         key={index}
                         fill={
@@ -148,68 +142,58 @@ function DashboardAnalytics() {
                       />
                     )
                   )}
-              </Pie>
+                </Pie>
 
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
 
-          <div className="dashboard-total">
-            <h3>
-              ₹
-              {total.toLocaleString(
-                "en-IN"
-              )}
-            </h3>
+            <div className="chart-total">
+              <h3>
+                ₹
+                {total.toLocaleString(
+                  "en-IN"
+                )}
+              </h3>
 
-            <p>Total</p>
+              <span>Total</span>
+            </div>
           </div>
 
-          <div className="dashboard-chart-legend">
-            <div className="legend-item">
-              <span className="dot add-money"></span>
+          <div className="dashboard-legend">
+            {chartData.map(
+              (entry, index) =>
+                entry.value > 0 && (
+                  <div
+                    className="legend-item"
+                    key={entry.name}
+                  >
+                    <div className="legend-left">
+                      <span
+                        className="legend-dot"
+                        style={{
+                          background:
+                            COLORS[
+                              index %
+                                COLORS.length
+                            ],
+                        }}
+                      ></span>
 
-              <span>
-                Add Money
-              </span>
+                      <span>
+                        {entry.name}
+                      </span>
+                    </div>
 
-              <strong>
-                ₹
-                {chartData[0]?.value.toLocaleString(
-                  "en-IN"
-                )}
-              </strong>
-            </div>
-
-            <div className="legend-item">
-              <span className="dot received-money"></span>
-
-              <span>
-                Received Money
-              </span>
-
-              <strong>
-                ₹
-                {chartData[1]?.value.toLocaleString(
-                  "en-IN"
-                )}
-              </strong>
-            </div>
-
-            <div className="legend-item">
-              <span className="dot send-money"></span>
-
-              <span>
-                Send Money
-              </span>
-
-              <strong>
-                ₹
-                {chartData[2]?.value.toLocaleString(
-                  "en-IN"
-                )}
-              </strong>
-            </div>
+                    <strong>
+                      ₹
+                      {entry.value.toLocaleString(
+                        "en-IN"
+                      )}
+                    </strong>
+                  </div>
+                )
+            )}
           </div>
         </>
       )}
