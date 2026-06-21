@@ -74,7 +74,6 @@ function Login() {
               required
             />
           </div>
-
           <div className="remember-forgot">
             <label>
               <input type="checkbox" />
