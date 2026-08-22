@@ -27,6 +27,8 @@ from reportlab.platypus import (
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 import tempfile
+
+from ai_assistant import get_financial_summary
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
@@ -591,3 +593,16 @@ def download_statement(
         media_type="application/pdf",
         filename="SmartPay_Statement.pdf"
     )
+
+@app.get("/ai-summary/{user_id}")
+def ai_summary(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
+
+    summary = get_financial_summary(
+        user_id,
+        db
+    )
+
+    return summary
