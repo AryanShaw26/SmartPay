@@ -68,34 +68,49 @@
 }
 
 /* ==========================
-   NOTIFICATION
+   AI FINANCIAL ASSISTANT
 ========================== */
 
-.notification-icon {
-  width: 48px;
+.ai-assistant-button {
   height: 48px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 18px;
 
   background: #1a1a1a;
 
+  color: #FFD700;
+
+  border: 1px solid rgba(255, 215, 0, 0.25);
+
   border-radius: 12px;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
 
   cursor: pointer;
 
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.notification-icon svg {
-  color: #FFD700;
-
-  font-size: 1.4rem;
+.ai-assistant-button svg {
+  font-size: 1.2rem;
 }
 
-.notification-icon:hover {
+.ai-assistant-button:hover {
   background: rgba(255, 215, 0, 0.1);
+
+  border-color: #FFD700;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
 }
 
 /* ==========================

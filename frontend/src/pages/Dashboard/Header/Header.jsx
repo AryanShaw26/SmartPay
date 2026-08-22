@@ -1,35 +1,32 @@
 import "./Header.css";
 
 import {
-  IoIosNotifications,
   IoIosArrowDropdownCircle,
 } from "react-icons/io";
 
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaRobot } from "react-icons/fa";
 
 import {
   useEffect,
   useState,
 } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 function Header() {
 
   const [userName, setUserName] =
     useState("User");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
 
     const storedUser =
-      localStorage.getItem(
-        "full_name"
-      );
+      localStorage.getItem("full_name");
 
     if (storedUser) {
-
-      setUserName(
-        storedUser
-      );
-
+      setUserName(storedUser);
     }
 
   }, []);
@@ -46,6 +43,8 @@ function Header() {
 
   return (
     <div className="header-container">
+
+      {/* LEFT SIDE */}
 
       <div className="header-left">
 
@@ -67,11 +66,28 @@ function Header() {
 
       </div>
 
+
+      {/* RIGHT SIDE */}
+
       <div className="header-right">
 
-        <div className="notification-icon">
-          <IoIosNotifications />
-        </div>
+        {/* AI FINANCIAL ASSISTANT */}
+
+        <button
+          className="ai-assistant-button"
+          onClick={() => navigate("/ai-assistant")}
+        >
+
+          <FaRobot />
+
+          <span>
+            AI Financial Assistant
+          </span>
+
+        </button>
+
+
+        {/* PROFILE */}
 
         <div className="profile-section">
 
@@ -86,7 +102,9 @@ function Header() {
           </div>
 
           <div className="dropdown">
+
             <IoIosArrowDropdownCircle />
+
           </div>
 
         </div>

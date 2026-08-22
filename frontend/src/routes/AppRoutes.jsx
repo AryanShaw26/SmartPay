@@ -12,6 +12,7 @@ import Analytics from "../pages/Analytics/Analytics";
 import Support from "../pages/Support/Support";
 import Settings from "../pages/Settings/Settings";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import AIAssistant from "../pages/AIAssistant/AIAssistant";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -27,6 +28,14 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ai-assistant"
+          element={
+            <ProtectedRoute>
+              <AIAssistant />
             </ProtectedRoute>
           }
         />
