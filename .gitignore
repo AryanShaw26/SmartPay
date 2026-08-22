@@ -1,0 +1,26 @@
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+backend/venv/
+
+# Environment variables
+backend/.env
+
+# =========================
+# Frontend
+# =========================
+
+node_modules/
+dist/
+
+# =========================
+# Vite
+# =========================
+
+*.local

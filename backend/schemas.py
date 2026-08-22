@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from decimal import Decimal
 
@@ -55,3 +55,11 @@ class ChangePasswordRequest(BaseModel):
     user_id: int
     current_password: str
     new_password: str
+
+class FinancialAssistantRequest(BaseModel):
+    user_id: int
+    question: str=Field(
+        ...,
+        min_length=1,
+        max_length=500
+    )
