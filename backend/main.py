@@ -28,7 +28,15 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 import tempfile
 
-from ai_assistant import get_financial_summary
+from ai_assistant import (
+    get_financial_summary,
+    get_financial_context,
+    ask_financial_assistant
+)
+from ai_assistant import ask_gemini
+
+from schemas import FinancialAssistantRequest
+
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
@@ -606,3 +614,69 @@ def ai_summary(
     )
 
     return summary
+
+@app.get("/ai-test")
+def ai_test():
+
+    response = ask_gemini(
+        "Explain what a digital wallet is in one sentence."
+    )
+
+    return {
+        "response": response
+    }
+
+@app.get("/ai-assistant/{user_id}")
+def financial_assistant(
+    user_id: int,
+    question: str,
+    db: Session = Depends(get_db)
+):
+
+    financial_context = get_financial_context(
+        user_id,
+        db
+    )
+
+    answer = ask_financial_assistant(
+        question,
+        financial_context
+    )
+
+    return {
+        "question": question,
+        "answer": answer
+    }
+
+
+@app.post("/ai-assistant")
+def financial_assistant(
+    request: FinancialAssistantRequest,
+    db: Session = Depends(get_db)
+):
+
+    try:
+
+        financial_context = get_financial_context(
+            request.user_id,
+            db
+        )
+
+        answer = ask_financial_assistant(
+            request.question,
+            financial_context
+        )
+
+        return {
+            "question": request.question,
+            "answer": answer
+        }
+
+    except Exception as e:
+
+        print("FINANCIAL ASSISTANT ERROR:", repr(e))
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to process financial assistant request."
+        )
